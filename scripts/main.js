@@ -1,7 +1,17 @@
-(function(){
-  'use strict';
+var app = window.app || {};
 
-  $(document).ready(function(){
-    $('body').prepend(JST.application());
-  });
-})();
+require(['marionette', 'backbone', './router'], function(Marionette, Backbone, router) {	
+	app = new Marionette.Application();
+
+	app.on('start', function() {
+		if (Backbone.history) {
+			Backbone.history.start();
+		} else {
+			console.log('no backbone router to start');
+		}
+	})
+
+	$(document).ready(function(){
+		app.start();
+	});
+})
