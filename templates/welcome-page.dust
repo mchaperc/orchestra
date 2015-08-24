@@ -1,2 +1,3 @@
-<div class="welcome-text">text</div>
-<div class="welcome-nav">nav</div>
+{@contextDump/} 
+<div class="welcome-text">hi{text}</div>
+<div class="welcome-nav">there{nav}</div>

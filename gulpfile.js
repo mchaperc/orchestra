@@ -13,12 +13,9 @@
   var autoprefix = require('gulp-autoprefixer');
   var minifyCSS = require('gulp-minify-css');
   var dust = require('gulp-dust');
-  // var GulpDustCompileRender = require('gulp-dust-compile-render');
-  // var fs = require('fs');
 
   var lessDir = 'styles';
-  var targetCSSDir = 'dist/styles';
-
+  var targetCSSDir = 'dist/styles';\
   var targetJSDir = 'dist/scripts';
 
   gulp.task('styles', function () {
@@ -66,6 +63,7 @@
     gulp.watch([
       '*.html',
       'scripts/**/*.js',
+      'templates/*.dust',
       'styles/*.less'
     ]).on('change', reload);
 

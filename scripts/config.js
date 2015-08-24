@@ -2,6 +2,7 @@ require.config({
 	baseUrl: "scripts",
 	paths: {
 		jquery: '../bower_components/jquery/dist/jquery',
+    templates: '../dist/scripts/templates',
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
 		'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
@@ -30,5 +31,10 @@ require.config({
 			deps: ['backbone', 'backbone.wreqr', 'backbone.babysitter'],
 			exports: 'Marionette'
 		}
-	}
+	},
+  map: {
+    '*': {'dust': 'dust'}
+  }
 });
+
+require(['templates']);
