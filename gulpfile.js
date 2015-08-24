@@ -11,7 +11,10 @@
   var notify = require('gulp-notify');
   var less = require('gulp-less');
   var autoprefix = require('gulp-autoprefixer');
-  var minifyCSS = require('gulp-minify-css')
+  var minifyCSS = require('gulp-minify-css');
+  var dust = require('gulp-dust');
+  // var GulpDustCompileRender = require('gulp-dust-compile-render');
+  // var fs = require('fs');
 
   var lessDir = 'styles';
   var targetCSSDir = 'dist/styles';
@@ -40,20 +43,13 @@
       .pipe(reload({stream: true}));
   });
 
-  gulp.task('templates', function(){
-    gulp.src('templates/**/*.hbs')
-      .pipe($.plumber())
-      .pipe($.handlebars())
-      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
-      .pipe($.declare({
-        namespace: 'JST',
-        noRedeclare: true, // Avoid duplicate declarations
-      }))
+  gulp.task('templates', function() {
+    return gulp.src('templates/*.dust')
+      .pipe(dust())
       .pipe($.concat('templates.js'))
-      .pipe(notify('Templates minified'))
       .pipe(gulp.dest('dist/scripts/'))
       .pipe(reload({stream: true}));
-  });
+  })
 
   gulp.task('build', ['scripts', 'templates', 'styles'], function(){});
 
@@ -74,7 +70,7 @@
     ]).on('change', reload);
 
     gulp.watch('styles/*.less', ['styles']);
-    gulp.watch('templates/**/*.hbs', ['templates']);
+    gulp.watch('templates/*.dust', ['templates']);
     gulp.watch('scripts/**/*.js', ['scripts']);
   });
 
