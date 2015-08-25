@@ -1,0 +1,37 @@
+[
+	{
+		"text": "Parent Information",
+		"link": "/info",
+		"icon": ""
+	},
+	{
+		"text": "Student Resources",
+		"link": "/resources",
+		"icon": ""
+	},
+	{
+		"text": "Contact Mrs. C",
+		"link": "/contact",
+		"icon": ""
+	},
+	{
+		"text": "7th and 8th Grade",
+		"link": "/7&8",
+		"icon": ""
+	},
+	{
+		"text": "6th Grade",
+		"link": "6",
+		"icon": ""
+	},
+	{
+		"text": "5th Grade",
+		"link": "5",
+		"icon": ""
+	},
+	{
+		"text": "4th Grade",
+		"link": "4",
+		"icon": ""
+	}
+]

@@ -1,6 +1,7 @@
 var app = window.app || {};
 
-require(['marionette', 'backbone', 'dust', 'templates', 'appRouter'], function(Marionette, Backbone, dust, templates, router) {	
+require(['marionette', 'backbone', 'dust', 'templates', 'router'], 
+	function(Marionette, Backbone, dust, templates, router) {	
 	app = new Marionette.Application();
 
 	app.on('start', function() {

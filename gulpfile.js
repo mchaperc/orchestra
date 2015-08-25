@@ -13,15 +13,15 @@
   var autoprefix = require('gulp-autoprefixer');
   var minifyCSS = require('gulp-minify-css');
   var dust = require('gulp-dust');
+  var insert = require('gulp-insert');
 
   var lessDir = 'styles';
-  var targetCSSDir = 'dist/styles';\
+  var targetCSSDir = 'dist/styles';
   var targetJSDir = 'dist/scripts';
 
   gulp.task('styles', function () {
       return gulp.src(lessDir + '/*.less')
           .pipe(less({ style: 'compressed' }).on('error', gutil.log))
-          //.pipe(autoprefix('last 10 version'))
           .pipe($.concat('main.css'))
           .pipe($.sourcemaps.write('.'))
           .pipe(gulp.dest(targetCSSDir))
@@ -48,7 +48,7 @@
       .pipe(reload({stream: true}));
   })
 
-  gulp.task('build', ['scripts', 'templates', 'styles'], function(){});
+  gulp.task('build', ['scripts', 'styles', 'templates'], function(){});
 
   gulp.task('serve', ['build'], function () {
     browserSync({

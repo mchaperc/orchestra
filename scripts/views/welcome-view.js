@@ -1,18 +1,26 @@
-define('welcomeView', [
+define([
 	'underscore',
 	'backbone', 
 	'marionette', 
-	'dust', 
-	'backbone.marionette.dust'
+	'backbone.marionette.dust',
+	'templates'
 ], 
-	function(_, Backbone, Marionette, dust, dustMarionette) {
-		console.log(dust);
-		return app.WelcomeView = Marionette.CompositeView.extend({
-			template: '../../templates/welcome-page',
+	function(_, Backbone, Marionette, dustMarionette, templates) {
+		return app.WelcomeView = Marionette.LayoutView.extend({
+			template: 'welcome-page.dust',
 			className: 'main-container',
+
+			regions: {
+				main: '.welcome-text',
+				nav: '.welcome-nav'
+			},
+
 			initialize: function() {
-				this.model = {text: 'Some text', nav: 'a few links could go here'};
-				console.log(this.template);
-			}
+				var NavView = Marionette.CollectionView.extend(this.collection);
+			},
+			onRender: function() {
+				
+			},
+
 		});
 });

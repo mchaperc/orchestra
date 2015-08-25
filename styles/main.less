@@ -3,11 +3,91 @@
 }
 
 @black: rgb(50,50,50);
-@orange: rgb(240, 160,50);
+@yellow: #F2B701;
+@orange: #E57D04;
 @white: rgb(250,250,250);
+@red: #DC0030;
+@pink: #B10058;
+@purple: #7C378A;
+@blue: #3465AA;
+@green: #09A275;
+@light-green: #7CB854;
 
 body {
 	background-color: @orange;
 	color: @black;
+	overflow: hidden;
 	text-align: center;
+}
+
+.welcome-text {
+	background-color: white;
+	border-bottom-right-radius: 50%;
+	border-top-right-radius: 50%;
+	height: 130vh;
+	position: absolute;
+	top: -15vh;
+	z-index: 1;
+}
+
+.welcome-content {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.welcome-nav {
+	padding: 0;
+}
+
+.nav-item {
+	color: white;
+	font-size: 1.2em;
+	height: 14.3vh;
+	letter-spacing: .05em;
+	position: relative;
+	a {
+		color: white;
+		position: absolute;
+		right: 5%;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.fa {
+		font-size: 1.5em;
+		margin-left: 1.5em;
+	}
+}
+
+.nav-item:hover {
+	cursor: pointer;
+	height: 15vh;
+}
+
+.nav-item:first-child {
+	background-color: @yellow;
+}
+
+.nav-item:nth-child(2) {
+	background-color: @orange;
+}
+
+.nav-item:nth-child(3) {
+	background-color: @red;
+}
+
+.nav-item:nth-child(4) {
+	background-color: @pink;
+}
+
+.nav-item:nth-child(5) {
+	background-color: @purple;
+}
+
+.nav-item:nth-child(6) {
+	background-color: @green;
+}
+
+.nav-item:last-child {
+	background-color: @light-green;
 }

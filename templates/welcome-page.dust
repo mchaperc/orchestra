@@ -1,3 +1,2 @@
-{@contextDump/} 
-<div class="welcome-text">hi{text}</div>
-<div class="welcome-nav">there{nav}</div>
+<section class="welcome-text col-md-6"></section>
+<section class="welcome-nav col-md-8 col-md-offset-4"></section>

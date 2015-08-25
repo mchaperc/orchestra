@@ -10,7 +10,8 @@ require.config({
 		bootstrap: '../node_modules/bootstrap/dist/js/bootstrap',
 		dust: '../bower_components/dustjs-linkedin/dist/dust-core',
 		marionette: '../bower_components/marionette/lib/core/backbone.marionette',
-		'backbone.marionette.dust': '../node_modules/backbone.marionette.dust/src/backbone.marionette.dust'
+		'backbone.marionette.dust': '../node_modules/backbone.marionette.dust/src/backbone.marionette.dust',
+    main: 'main'
 	},
 	shim: {
 		'backbone': {
@@ -30,11 +31,14 @@ require.config({
 		'marionette': {
 			deps: ['backbone', 'backbone.wreqr', 'backbone.babysitter'],
 			exports: 'Marionette'
-		}
+		},
+    'templates': {
+      deps: ['dust']
+    }
 	},
   map: {
     '*': {'dust': 'dust'}
   }
 });
 
-require(['templates']);
+require(['templates', 'main']);
