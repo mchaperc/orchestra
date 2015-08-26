@@ -4,7 +4,54 @@ define(function() {
 				{
 					text: 'Parent Information',
 					link: '/info',
-					icon: 'info-circle'
+					icon: 'info-circle',
+					sublinks: [
+						{
+							text: 'Explore the Website',
+							link: '/info/explore',
+							icon: 'compass'
+						},
+						{
+							text: 'Instruments',
+							link: '/info/explore',
+							icon: 'blacktie'
+						},
+						{
+							text: 'Orchestra Handbook',
+							link: '/info/handbook',
+							icon: 'map'
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						},
+						{
+							text: '',
+							link: '',
+							icon: ''
+						}
+					]
 				},
 				{
 					text: 'Student Resources',
@@ -19,22 +66,22 @@ define(function() {
 				{
 					text: '7th and 8th Grade',
 					link: '/7&8',
-					icon: 'sun-o'
+					icon: 'graduation-cap'
 				},
 				{
 					text: '6th Grade',
 					link: '6',
-					icon: 'sun-o'
+					icon: 'smile-o'
 				},
 				{
 					text: '5th Grade',
 					link: '5',
-					icon: 'sun-o'
+					icon: 'gamepad'
 				},
 				{
 					text: '4th Grade',
 					link: '4',
-					icon: 'sun-o'
+					icon: 'optin-monster'
 				}
 		]}
 })
