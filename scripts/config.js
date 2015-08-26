@@ -1,15 +1,15 @@
 require.config({
 	baseUrl: "scripts",
 	paths: {
-		jquery: '../bower_components/jquery/dist/jquery',
-    templates: '../dist/scripts/templates',
-		underscore: '../bower_components/underscore/underscore',
-		backbone: '../bower_components/backbone/backbone',
-		'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
-		'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
+		jquery: '../node_modules/jquery/dist/jquery',
+    	templates: '../dist/scripts/templates',
+		underscore: '../node_modules/underscore/underscore',
+		backbone: '../node_modules/backbone/backbone',
+		'backbone.wreqr': '../node_modules/backbone.wreqr/lib/backbone.wreqr',
+		'backbone.babysitter': '../node_modules/backbone.babysitter/lib/backbone.babysitter',
 		bootstrap: '../node_modules/bootstrap/dist/js/bootstrap',
-		dust: '../bower_components/dustjs-linkedin/dist/dust-core',
-		marionette: '../bower_components/marionette/lib/core/backbone.marionette',
+		dust: '../node_modules/dustjs-linkedin/dist/dust-core',
+		marionette: '../node_modules/backbone.marionette/lib/core/backbone.marionette',
 		'backbone.marionette.dust': '../node_modules/backbone.marionette.dust/src/backbone.marionette.dust',
     main: 'main'
 	},
@@ -32,9 +32,9 @@ require.config({
 			deps: ['backbone', 'backbone.wreqr', 'backbone.babysitter'],
 			exports: 'Marionette'
 		},
-    'templates': {
-      deps: ['dust']
-    }
+	    'templates': {
+	      deps: ['dust']
+	    },
 	},
   map: {
     '*': {'dust': 'dust'}
