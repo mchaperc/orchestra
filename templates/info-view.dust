@@ -1,0 +1,13 @@
+{#Info}
+	<nav class="navbar navbar-fixed-top">
+		<ul class="parent-info-links">
+			{#parentLinks}
+				<a href="{link}"><li class="parent-info-links-link">{text}</li></a>
+			{/parentLinks}
+		</ul>
+	</nav>
+	<div class="parent-info-text">
+		<h3 class="jumbotron">Click one of the above links to view more information.</h3>
+	</div>
+	<div class="container parent-info-content"></div>
+{/Info}

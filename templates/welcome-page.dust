@@ -1,2 +1,2 @@
-<section class="welcome-text col-md-6"></section>
-<section class="welcome-nav col-md-8 col-md-offset-4"></section>
+<section class="welcome-text col-sm-6"></section>
+<section class="welcome-nav col-sm-8 col-sm-offset-4"></section>

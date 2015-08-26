@@ -1,5 +1,5 @@
-define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main', 'views/welcome-view-nav', 'collections/nav', 'models/welcome'], 
-	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, NavColl, WelcomeText) {
+define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main', 'views/welcome-view-nav', 'views/info-view', 'collections/nav', 'models/welcome', 'models/info'], 
+	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoView, NavColl, WelcomeText, Info) {
 		app.router = Marionette.AppRouter.extend({
 			routes: {
 				'': 'index',
@@ -27,8 +27,10 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 				}
 			},
 			info: function() {
-				console.log('info');
 				$('.app').css({'background-color': '#F2B701'});
+				var info = new Backbone.Model({Info});
+				var infoView = new InfoView({model: info, router: this});
+				$('.app').append(infoView.render().el);
 			},
 			resources: function() {
 				$('.app').css({'background-color': '#E57D04'});
