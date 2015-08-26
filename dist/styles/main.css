@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #e57d04;
+  color: #323232;
+  overflow: hidden;
+  text-align: center;
+}
+.welcome-text {
+  background-color: white;
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
+  height: 130vh;
+  position: absolute;
+  top: -15vh;
+  z-index: 1;
+}
+.welcome-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.welcome-nav {
+  padding: 0;
+  position: absolute;
+}
+.nav-item {
+  color: white;
+  font-size: 1.2em;
+  height: 14.3vh;
+  letter-spacing: .05em;
+  position: relative;
+  transition: all .2s ease;
+}
+.nav-item a {
+  color: white;
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-item .fa {
+  font-size: 1.5em;
+  margin-left: 1.5em;
+  vertical-align: middle;
+}
+iframe {
+  left: 6%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-item:hover {
+  cursor: pointer;
+  height: 15vh;
+}
+.nav-item:first-child {
+  background-color: #f2b701;
+}
+.nav-item:nth-child(2) {
+  background-color: #e57d04;
+}
+.nav-item:nth-child(3) {
+  background-color: #dc0030;
+}
+.nav-item:nth-child(4) {
+  background-color: #b10058;
+}
+.nav-item:nth-child(5) {
+  background-color: #7c378a;
+}
+.nav-item:nth-child(6) {
+  background-color: #09a275;
+}
+.nav-item:last-child {
+  background-color: #7cb854;
+}

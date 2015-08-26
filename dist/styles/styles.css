@@ -1,0 +1,14 @@
+* {
+	box-sizing: border-box;
+}
+
+@black: rgb(50,50,50);
+@orange: rgb(240, 160,50);
+@white: rgb(250,250,250);
+
+body {
+	background-color: @orange;
+	color: @black;
+	text-align: center;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4ubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiJzdHlsZXMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiKiB7XG5cdGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG59XG5cbkBibGFjazogcmdiKDUwLDUwLDUwKTtcbkBvcmFuZ2U6IHJnYigyNDAsIDE2MCw1MCk7XG5Ad2hpdGU6IHJnYigyNTAsMjUwLDI1MCk7XG5cbmJvZHkge1xuXHRiYWNrZ3JvdW5kLWNvbG9yOiBAb3JhbmdlO1xuXHRjb2xvcjogQGJsYWNrO1xuXHR0ZXh0LWFsaWduOiBjZW50ZXI7XG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9 */
