@@ -1,1 +1,1 @@
-<a href="{link}">{text} <i class="fa fa-{icon}"></i></a>
+<a href="{link}"><span class="nav-text">{text} <i class="fa fa-{icon}"></i></span></a>

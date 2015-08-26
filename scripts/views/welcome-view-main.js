@@ -6,6 +6,9 @@ define(['marionette', 'backbone'],
 			events: {
 				'click .welcome-video-button': 'showVideo'
 			},
+			initialize: function() {
+				
+			},
 			showVideo: function(e) {
 				e.preventDefault();
 
