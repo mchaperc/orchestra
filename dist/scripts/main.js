@@ -1,15 +1,15 @@
 require.config({
 	baseUrl: "scripts",
 	paths: {
-		jquery: '../bower_components/jquery/dist/jquery',
-    templates: '../dist/scripts/templates',
-		underscore: '../bower_components/underscore/underscore',
-		backbone: '../bower_components/backbone/backbone',
-		'backbone.wreqr': '../bower_components/backbone.wreqr/lib/backbone.wreqr',
-		'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
+		jquery: '../node_modules/jquery/dist/jquery',
+    	templates: '../dist/scripts/templates',
+		underscore: '../node_modules/underscore/underscore',
+		backbone: '../node_modules/backbone/backbone',
+		'backbone.wreqr': '../node_modules/backbone.wreqr/lib/backbone.wreqr',
+		'backbone.babysitter': '../node_modules/backbone.babysitter/lib/backbone.babysitter',
 		bootstrap: '../node_modules/bootstrap/dist/js/bootstrap',
-		dust: '../bower_components/dustjs-linkedin/dist/dust-core',
-		marionette: '../bower_components/marionette/lib/core/backbone.marionette',
+		dust: '../node_modules/dustjs-linkedin/dist/dust-core',
+		marionette: '../node_modules/backbone.marionette/lib/core/backbone.marionette',
 		'backbone.marionette.dust': '../node_modules/backbone.marionette.dust/src/backbone.marionette.dust',
     main: 'main'
 	},
@@ -32,9 +32,9 @@ require.config({
 			deps: ['backbone', 'backbone.wreqr', 'backbone.babysitter'],
 			exports: 'Marionette'
 		},
-    'templates': {
-      deps: ['dust']
-    }
+	    'templates': {
+	      deps: ['dust']
+	    },
 	},
   map: {
     '*': {'dust': 'dust'}
@@ -2167,7 +2167,14 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, NavColl, WelcomeText) {
 		app.router = Marionette.AppRouter.extend({
 			routes: {
-				'': 'index'
+				'': 'index',
+				'info': 'info',
+				'resources': 'resources',
+				'contact': 'contact',
+				'7&8': 'sevenEight',
+				'6' : 'six',
+				'5': 'five',
+				'4': 'four'
 			},
 			index: function() {
 				var stuff = new Backbone.Model({text: 'Some text', nav: 'a few links could go here'});
@@ -2176,9 +2183,35 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 				}));
 				var welcome = new Backbone.Model(WelcomeText);
 				var welcomeView = new WelcomeView({model: nav});
-				$('.app').append(welcomeView.render().el);
-				welcomeView.showChildView('main', new WelcomeMainView({model: welcome}));
-				welcomeView.showChildView('nav', new NavView({collection: nav}));
+				if ($('.app').html()) {
+					$('.main-container').animate({'right': '0%'}, 500)
+				} else {
+					$('.app').append(welcomeView.render().el);
+					welcomeView.showChildView('main', new WelcomeMainView({model: welcome}));
+					welcomeView.showChildView('nav', new NavView({collection: nav, router: this}));
+				}
+			},
+			info: function() {
+				console.log('info');
+				$('.app').css({'background-color': '#F2B701'});
+			},
+			resources: function() {
+				$('.app').css({'background-color': '#E57D04'});
+			},
+			contact: function() {
+				$('.app').css({'background-color': '#DC0030'});
+			},
+			sevenEight: function() {
+				$('.app').css({'background-color': '#B10058'});
+			},
+			six: function() {
+				$('.app').css({'background-color': '#7C378A'});
+			},
+			five: function() {
+				$('.app').css({'background-color': '#09A275'});
+			},
+			four: function() {
+				$('.app').css({'background-color': '#7CB854'});
 			}
 		});
 		var router = new app.router();
@@ -2252,7 +2285,7 @@ define(function() {
 				{
 					text: '7th and 8th Grade',
 					link: '/7&8',
-					icon: 'graduation-cap'
+					icon: 'bolt'
 				},
 				{
 					text: '6th Grade',
@@ -2287,6 +2320,9 @@ define(['marionette', 'backbone'],
 			events: {
 				'click .welcome-video-button': 'showVideo'
 			},
+			initialize: function() {
+				
+			},
 			showVideo: function(e) {
 				e.preventDefault();
 
@@ -2312,8 +2348,17 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 			className: 'welcome-view-nav',
 			tagName: 'ul',
 			childView: navItem,
-			initialize: function() {
+			events: {
+				'click .nav-item > a': 'showContent'
 			},
+			initialize: function(options) {
+				this.router = options.router
+			},
+			showContent: function(e) {
+				e.preventDefault();
+				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500)
+				this.router.navigate($(e.currentTarget).attr('href'), true);
+			}
 		})
 	})
 define([
