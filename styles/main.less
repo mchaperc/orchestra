@@ -14,16 +14,27 @@
 @light-green: #7CB854;
 
 body {
-	background-color: @orange;
+	background-color: @white;
 	color: @black;
 	overflow: hidden;
 	text-align: center;
+}
+
+.app {
+	height: 100vh;
+	transition: all 3s ease;
+}
+
+.main-container {
+	height: 100%;
+	position: relative;
 }
 
 .welcome-text {
 	background-color: white;
 	border-bottom-right-radius: 50%;
 	border-top-right-radius: 50%;
+	clear: both;
 	height: 130vh;
 	position: absolute;
 	top: -15vh;
@@ -34,11 +45,26 @@ body {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+	transition: all .3s ease;
 }
 
 .welcome-nav {
 	padding: 0;
 	position: absolute;
+	-webkit-transition: 1s all ease;
+	-moz-transition: 1s all ease;
+	-ms-transition: 1s all ease;
+	-o-transition: 1s all ease;
+	transition: 1s all ease;
+}
+
+.main-container {
+	transition: all 1s ease;
+}
+
+.slide-left {
+	right: 94.5%;
+	transition: all 1s ease;
 }
 
 .nav-item {
@@ -50,10 +76,16 @@ body {
 	transition: all .2s ease;
 	a {
 		color: white;
-		position: absolute;
-		right: 3%;
-		top: 50%;
-		transform: translateY(-50%);
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+		z-index: 4;
+		.nav-text {
+			position: absolute;
+			right: 3%;
+			top: 50%;
+			transform: translateY(-50%);
+		}
 	}
 	.fa {
 		font-size: 1.5em;

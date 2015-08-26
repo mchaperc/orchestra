@@ -66,7 +66,7 @@ define(function() {
 				{
 					text: '7th and 8th Grade',
 					link: '/7&8',
-					icon: 'graduation-cap'
+					icon: 'bolt'
 				},
 				{
 					text: '6th Grade',
