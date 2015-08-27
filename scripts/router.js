@@ -1,9 +1,28 @@
-define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main', 'views/welcome-view-nav', 'views/info-view', 'collections/nav', 'models/welcome', 'models/info'], 
-	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoView, NavColl, WelcomeText, Info) {
+define(['marionette', 
+		'backbone', 
+		'views/welcome-view', 
+		'views/welcome-view-main', 
+		'views/welcome-view-nav', 
+		'views/info-nav',
+		'views/main-content-layout',
+		'views/info-view-instruments',
+		'collections/nav', 
+		'models/welcome', 
+		'models/info', 
+		'models/instruments'
+		], 
+	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoNav, MainContentView, InstrumentView, NavColl, WelcomeText, Info, Instruments) {
 		app.router = Marionette.AppRouter.extend({
 			routes: {
 				'': 'index',
 				'info': 'info',
+				'info/instruments': 'instruments',
+				'info/handbook': 'handbook',
+				'info/calendar': 'calendar',
+				'info/stores': 'stores',
+				'info/donors': 'donors',
+				'info/edmodo': 'edmodo',
+				'info/remind': 'remind',
 				'resources': 'resources',
 				'contact': 'contact',
 				'7&8': 'sevenEight',
@@ -11,44 +30,92 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 				'5': 'five',
 				'4': 'four'
 			},
-			index: function() {
-				var stuff = new Backbone.Model({text: 'Some text', nav: 'a few links could go here'});
-				var nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
+
+			initialize: function() {
+				this.nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
 					return item;
 				}));
-				var welcome = new Backbone.Model(WelcomeText);
-				var welcomeView = new WelcomeView({model: nav});
+				this.welcome = new Backbone.Model(WelcomeText);
+				this.info = new Backbone.Model({Info});
+				this.welcomeView = new WelcomeView({model: this.nav}); 
+				this.contentView = new MainContentView();
+			},
+
+			index: function() {
 				if ($('.app').html()) {
 					$('.main-container').animate({'right': '0%'}, 500)
 				} else {
-					$('.app').append(welcomeView.render().el);
-					welcomeView.showChildView('main', new WelcomeMainView({model: welcome}));
-					welcomeView.showChildView('nav', new NavView({collection: nav, router: this}));
+					$('.app').append(this.welcomeView.render().el);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
 				}
 			},
 			info: function() {
-				$('.app').css({'background-color': '#F2B701'});
-				var info = new Backbone.Model({Info});
-				var infoView = new InfoView({model: info, router: this});
-				$('.app').append(infoView.render().el);
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				this.welcomeView.showChildView('mainContent', this.contentView);
+				this.contentView.showChildView('upperContent', new InfoNav({model: this.info}));
+
+			},
+			instruments: function() {
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var instruments = new Backbone.Model({Instruments});
+				this.welcomeView.showChildView('mainContent', this.contentView);
+				this.contentView.showChildView('upperContent', new InfoNav({model: this.info}));
+				this.contentView.showChildView('lowerContent', new InstrumentView({model: instruments}))
+				console.log('instruments');
+			},
+			handbook: function() {
+
+			},
+			calendar: function() {
+
+			},
+			stores: function() {
+
+			},
+			donors: function() {
+
+			},
+			edmodo: function() {
+
+			},
+			remind: function() {
+
 			},
 			resources: function() {
-				$('.app').css({'background-color': '#E57D04'});
+				this.checkContent();
+				$('.app').attr('class', 'app resources');
 			},
 			contact: function() {
-				$('.app').css({'background-color': '#DC0030'});
+				this.checkContent();
+				$('.app').attr('class', 'app contact');
 			},
 			sevenEight: function() {
-				$('.app').css({'background-color': '#B10058'});
+				this.checkContent();
+				$('.app').attr('class', 'app sevenEight');
 			},
 			six: function() {
-				$('.app').css({'background-color': '#7C378A'});
+				this.checkContent();
+				$('.app').attr('class', 'app six');
 			},
 			five: function() {
-				$('.app').css({'background-color': '#09A275'});
+				this.checkContent();
+				$('.app').attr('class', 'app five');
 			},
 			four: function() {
-				$('.app').css({'background-color': '#7CB854'});
+				this.checkContent();
+				$('.app').attr('class', 'app four');
+			},
+
+			checkContent: function() {
+				if (!$('.app').html()) {
+					$('.app').append(this.welcomeView.render().el);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
+					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'});
+				}
 			}
 		});
 		var router = new app.router();

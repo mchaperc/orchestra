@@ -1,7 +1,7 @@
 * {
 	box-sizing: border-box;
 }
-
+//Colors
 @black: rgb(50,50,50);
 @grey: rgb(120,120,120);
 @yellow: #F2B701;
@@ -14,6 +14,51 @@
 @green: #09A275;
 @light-green: #7CB854;
 
+//Other
+@off-left: 5.5%;
+@font-plus-twenty-per: 1.2em;
+@standard-plus-fifty: 1.5em;
+@big-font: 4em;
+@uno-em: 1em;
+@screen-height: 100vh;
+@fast-trans: .2s;
+@less-fast-trans: .3s;
+@medium-trans: .5s;
+@slow-trans: 1s;
+@very-slow-trans: 2s;
+@fill-parent-container: 100%;
+@semi-circle: 50%;
+@screen-partial: @screen-height/7;
+
+
+.info {
+	background-color: @yellow;
+}
+
+.resources {
+	background-color: @orange;
+}
+
+.contact {
+	background-color: @red;
+}
+
+.sevenEight {
+	background-color: @pink;
+}
+
+.six {
+	background-color: @purple;
+}
+
+.five {
+	background-color: @green;
+}
+
+.four {
+	background-color: @light-green;
+}
+
 body {
 	background-color: @white;
 	color: @black;
@@ -23,23 +68,30 @@ body {
 
 .app {
 	height: 100vh;
-	transition: all 2s ease;
+	transition: all @very-slow-trans ease;
 }
 
 .main-container {
-	height: 100%;
+	height: @fill-parent-container;
 	position: relative;
+}
+
+.main-content {
+	left: 100%;
+	padding: 0;
+	position: absolute;
+	width: @fill-parent-container;
 }
 
 .welcome-text {
 	// background-color: @black;
 	// background-image: url('http://www.seattlechambermusic.org/wp-content/themes/scms/img/20-background.jpg');
-	// background-position: 80% 100%;
+	// background-position: 80% @fill-parent-container;
 	// background-repeat: no-repeat;
 	// background-size: cover;
 	background-color: @white;
-	border-bottom-right-radius: 50%;
-	border-top-right-radius: 50%;
+	border-bottom-right-radius: @semi-circle;
+	border-top-right-radius: @semi-circle;
 	clear: both;
 	// color: @white;
 	color: @black;
@@ -54,35 +106,35 @@ body {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	transition: all .3s ease;
+	transition: all @less-fast-trans ease;
 }
 
 .welcome-nav {
 	padding: 0;
 	position: absolute;
-	-webkit-transition: 1s all ease;
-	-moz-transition: 1s all ease;
-	-ms-transition: 1s all ease;
-	-o-transition: 1s all ease;
-	transition: 1s all ease;
+	-webkit-transition: @slow-trans all ease;
+	-moz-transition: @slow-trans all ease;
+	-ms-transition: @slow-trans all ease;
+	-o-transition: @slow-trans all ease;
+	transition: @slow-trans all ease;
 	z-index: 1;
 }
 
 .main-container {
-	transition: all 1s ease;
+	transition: all @slow-trans ease;
 }
 
 .welcome-heading {
 	font-family: 'Dancing Script', cursive;
-	font-size: 4em;
+	font-size: @big-font;
 	font-weight: 300;
 }
 
 .welcome-video-button {
 	background-color: @green;
 	border: none;
-	margin-top: 1em;
-	transition: all .2s ease;
+	margin-top: @uno-em;
+	transition: all @fast-trans ease;
 	&:hover {
 		background-color: @light-green;
 	}
@@ -90,16 +142,16 @@ body {
 
 .nav-item {
 	color: white;
-	font-size: 1.2em;
-	height: 14.3vh;
+	font-size: @font-plus-twenty-per;
+	height: @screen-partial;
 	letter-spacing: .05em;
 	position: relative;
-	transition: all .2s ease;
+	transition: all @fast-trans ease;
 	a {
 		color: white;
 		display: inline-block;
-		height: 100%;
-		width: 100%;
+		height: @fill-parent-container;
+		width: @fill-parent-container;
 		z-index: 10;
 		.nav-text {
 			position: absolute;
@@ -109,8 +161,8 @@ body {
 		}
 	}
 	.fa {
-		font-size: 1.5em;
-		margin-left: 1.5em;
+		font-size: @standard-plus-fifty;
+		margin-left: @standard-plus-fifty;
 		vertical-align: middle;
 	}
 }
@@ -124,7 +176,7 @@ iframe {
 
 .nav-item:hover {
 	cursor: pointer;
-	height: 15vh;
+	height: @screen-height/6;
 }
 
 .nav-item:first-child {
@@ -156,13 +208,10 @@ iframe {
 }
 
 .content {
-	height: 100vh;
-	margin-left: 5.5%;
+	height: @screen-height;
+	margin: 0;
+	padding: 0;
 	z-index: 5;
-}
-
-.info-container {
-	margin-left: 5.5%;
 }
 
 .navbar {
@@ -172,11 +221,11 @@ iframe {
 .parent-info-links li {
 	color: @white;
 	display: inline-block;
-	font-size: 1.2em;
-	padding: 0em 1em;
-	height: 14.3vh;
-	line-height: 14.3vh;
-	transition: all .3s ease;
+	font-size: @font-plus-twenty-per;
+	padding: 0em @uno-em;
+	height: @screen-partial;
+	line-height: @screen-partial;
+	transition: all @less-fast-trans ease;
 	&:hover {
 		background-color: @white;
 		border-bottom: 2px solid @grey;
@@ -186,6 +235,12 @@ iframe {
 
 .parent-info-text {
 	position: absolute;
-	top: 11.8vh;
-	width: 100%;
+	top: @screen-partial;
+	width: @fill-parent-container;
+	.jumbotron {
+		height: @screen-partial;
+		line-height: @screen-partial;
+		margin: 0;
+		padding: 0;
+	}
 }

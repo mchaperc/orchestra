@@ -8,7 +8,6 @@ define(['backbone', 'marionette', 'templates'],
 
 			},
 			initialize: function() {
-				console.log(this.model);
 			}
 		})
 	})

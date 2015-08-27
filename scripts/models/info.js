@@ -2,31 +2,31 @@ define(function() {
 	return {
 		parentLinks: [
 			{
-				link: '/info/instruments',
+				link: '#info/instruments',
 				text: 'Instruments'
 			},
 			{
-				link: '/info/handbook',
+				link: '#info/handbook',
 				text: 'Orchestra Handbook'
 			},
 			{
-				link: '/info/calendar',
+				link: '#info/calendar',
 				text: '2015-2016 Calendar'
 			},
 			{
-				link: '/info/stores',
+				link: '#info/stores',
 				text: 'Music Stores'
 			},
 			{
-				link: '/info/donors',
+				link: '#info/donors',
 				text: 'Donors Choose'
 			},
 			{
-				link: '/info/edmodo',
+				link: '#info/edmodo',
 				text: 'Edmodo'
 			},
 			{
-				link: '/info/remind',
+				link: '#info/remind',
 				text: 'Remind'
 			}
 		]
