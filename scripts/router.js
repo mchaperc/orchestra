@@ -52,6 +52,7 @@ define(['marionette',
 			},
 			info: function() {
 				this.checkContent();
+				$('.lowerContent').html('');
 				$('.app').attr('class', 'app info');
 				this.welcomeView.showChildView('mainContent', this.contentView);
 				this.contentView.showChildView('upperContent', new InfoNav({model: this.info}));

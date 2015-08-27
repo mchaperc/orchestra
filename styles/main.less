@@ -77,10 +77,16 @@ body {
 }
 
 .main-content {
+	height: @screen-height;
 	left: 100%;
 	padding: 0;
 	position: absolute;
 	width: @fill-parent-container;
+}
+
+.main-content-container {
+	height: @fill-parent-container;
+	overflow: auto;
 }
 
 .welcome-text {
@@ -242,5 +248,52 @@ iframe {
 		line-height: @screen-partial;
 		margin: 0;
 		padding: 0;
+	}
+}
+
+.upperContent {
+	height: @screen-partial*2;
+	z-index: 30;
+}
+
+.lowerContent {
+	padding: 2em;
+	text-align: left;
+	z-index: 0;
+	h3 {
+		margin-bottom: 1em;
+		text-decoration: underline;
+	}
+	p {
+		font-size: @font-plus-twenty-per;
+	}
+	ul > li {
+		margin-bottom: 1em;
+	}
+	li ul li {
+		background-color: @white;
+		border-radius: 5px;
+		display: inline-block;
+		list-style: circle;
+		margin-left: 5%;
+		transition: all .5s ease;
+		vertical-align: top;
+		width: 40%;
+	}
+	li ul li:hover {
+		background-color: @black;
+	}
+	li ul li p {
+		margin: 1em;
+		opacity: 0;
+		transition: all .4s ease;
+	}
+	li ul li:active p {
+		color: @white;
+		opacity: 1;
+	}
+	li ul li:hover p {
+		color: @white;
+		opacity: 1;
 	}
 }

@@ -5,7 +5,7 @@ define(['backbone',
 	function(Backbone, Marionette, templates) {
 		return app.InfoViewInstruments = Marionette.ItemView.extend({
 			template: 'info-view-instruments.dust',
-			className: 'container instruments',
+			className: 'instruments',
 			tagName: 'section',
 			events: {
 
