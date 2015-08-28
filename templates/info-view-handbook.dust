@@ -1,4 +1,4 @@
-{#Info}
+{#Handbook}
 	<nav class="navbar">
 		<ul class="parent-info-links col-sm-10">
 			{#parentLinks}
@@ -6,10 +6,19 @@
 			{/parentLinks}
 		</ul>
 	</nav>
-	<div class="parent-info-text jumbotron">
-		<h3 class="col-sm-10">Click one of the above links to view more information.</h3>
-	</div>
 
+	<section class="handbook col-sm-9">
+		<h2 class="page-header">{title}</h2>
+		<p>{titleSubText}</p>
+		{#additionalText}
+			<ul>
+				{#prompts}
+					<a href="{link}"><li>{text}</li></a>
+				{/prompts}
+			</ul>	
+		{/additionalText}
+	</section>
+	
 	<div class="home">
 		<a href="/" class="{routeClass}">
 			<div class="home-container">
@@ -18,4 +27,5 @@
 			</div>
 		</a>
 	</div>
-{/Info}
+	
+{/Handbook}

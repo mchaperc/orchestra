@@ -4,7 +4,7 @@
 //Colors
 @black: rgb(50,50,50);
 @grey: rgb(120,120,120);
-@yellow: #F2B701;
+@yellow: rgb(242, 183, 1);
 @orange: #E57D04;
 @white: rgb(250,250,250);
 @red: #DC0030;
@@ -35,28 +35,56 @@
 	background-color: @yellow;
 }
 
+.home-info {
+	color: @yellow;
+}
+
 .resources {
 	background-color: @orange;
+}
+
+.home-resources {
+	color: @orange;
 }
 
 .contact {
 	background-color: @red;
 }
 
+.home-contact {
+	color: @red;
+}
+
 .sevenEight {
 	background-color: @pink;
+}
+
+.home-sevenEight {
+	color: @pink;
 }
 
 .six {
 	background-color: @purple;
 }
 
+.home-six {
+	color: @purple;
+}
+
 .five {
 	background-color: @green;
 }
 
+.home-five {
+	color: @green;
+}
+
 .four {
 	background-color: @light-green;
+}
+
+.home-four {
+	color: @light-green;
 }
 
 body {
@@ -79,6 +107,7 @@ body {
 .main-content {
 	height: @screen-height;
 	left: 100%;
+	overflow: auto;
 	padding: 0;
 	position: absolute;
 	width: @fill-parent-container;
@@ -86,7 +115,6 @@ body {
 
 .main-content-container {
 	height: @fill-parent-container;
-	overflow: auto;
 }
 
 .welcome-text {
@@ -109,10 +137,12 @@ body {
 }
 
 .welcome-content {
+	left: 5%;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	transition: all @less-fast-trans ease;
+	width: 90%;
 }
 
 .welcome-nav {
@@ -154,7 +184,7 @@ body {
 	position: relative;
 	transition: all @fast-trans ease;
 	a {
-		color: white;
+		color: inherit;
 		display: inline-block;
 		height: @fill-parent-container;
 		width: @fill-parent-container;
@@ -214,14 +244,19 @@ iframe {
 }
 
 .content {
-	height: @screen-height;
 	margin: 0;
 	padding: 0;
 	z-index: 5;
 }
 
 .navbar {
-	z-index: 0;
+	background-color: @yellow;
+	opacity: 1;
+	padding-left: 0;
+	position: relative;
+	margin-top: -1px;
+	width: 94.5%;
+	z-index: 5;
 }
 
 .parent-info-links li {
@@ -239,30 +274,75 @@ iframe {
 	}
 }
 
-.parent-info-text {
-	position: absolute;
-	top: @screen-partial;
-	width: @fill-parent-container;
-	.jumbotron {
-		height: @screen-partial;
-		line-height: @screen-partial;
-		margin: 0;
-		padding: 0;
+.selected {
+	background-color: @white;
+	border-bottom: 2px solid @grey;
+	p {
+		color: @grey;
 	}
 }
 
-.upperContent {
-	height: @screen-partial*2;
-	z-index: 30;
+.parent-info-text {
+	height: @screen-partial;
+	line-height: @screen-partial;
+	padding: 0;
+	position: absolute;
+	top: @screen-partial;
+	width: @fill-parent-container;
+	z-index: 5;
+	h3 {
+		line-height: @screen-partial;
+		margin: 0;
+	}
 }
 
-.lowerContent {
-	padding: 2em;
+.instruments {
+	color: @white;
+	padding: 2em 2em 2em 5em;
+	position: relative;
 	text-align: left;
 	z-index: 0;
-	h3 {
-		margin-bottom: 1em;
-		text-decoration: underline;
+	.card {
+		background-color: rgb(255, 203, 21);
+		color: @yellow;
+		height: @screen-partial;
+		margin-left: 25%;
+		margin-bottom: 2em;
+		margin-top: 2em;
+		width: 50%;
+		&:hover, &:active {
+			background-color: @white;
+			color: @yellow;
+		}
+		&:hover .card-right, &:active .card-right {
+			color: @yellow;
+		}
+		h3 { 
+			font-size: 2.2em;
+			font-weight: 300;
+			height: @fill-parent-container;
+		}
+		.card-left, .card-right {
+			display: inline-block;
+			height: @fill-parent-container;
+			line-height: @screen-partial;
+			margin: 0;
+		}
+		.card-left {
+			padding-right: .5em;
+			text-align: right;
+			width: 40%;
+		}
+		.card-right {
+			color: rgb(255, 203, 21);
+			text-align: left;
+			width: 60%;
+		}
+	}
+	h2 {
+		color: white;
+		font-size: 4em;
+		font-weight: 300;
 	}
 	p {
 		font-size: @font-plus-twenty-per;
@@ -271,29 +351,46 @@ iframe {
 		margin-bottom: 1em;
 	}
 	li ul li {
-		background-color: @white;
-		border-radius: 5px;
+		color: @white;
 		display: inline-block;
+		font-size: .9em;
 		list-style: circle;
-		margin-left: 5%;
-		transition: all .5s ease;
+		margin-right: 5%;
 		vertical-align: top;
-		width: 40%;
+		width: 45%;
 	}
-	li ul li:hover {
-		background-color: @black;
+}
+
+.home {
+	background-color: @white;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	bottom: @screen-partial*2.5;
+	font-size: 1.5em;
+	height: @screen-partial*2;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	transition: all .3s ease;
+	width: 15%;
+	a {
+		height: @fill-parent-container;
+		transition: all .3s ease;
+		width: @fill-parent-container;
 	}
-	li ul li p {
-		margin: 1em;
-		opacity: 0;
-		transition: all .4s ease;
+	.home-container {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
 	}
-	li ul li:active p {
-		color: @white;
-		opacity: 1;
-	}
-	li ul li:hover p {
-		color: @white;
-		opacity: 1;
-	}
+}
+
+.home:hover {
+	background-color: @black;
+	cursor: pointer;
+}
+
+.home:hover a {
+	color: @white;
 }

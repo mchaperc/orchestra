@@ -1,0 +1,33 @@
+{#Resources}
+
+	<h1 class="page-header">{title}</h1>
+	<ul class="resources-links">
+		{#resources}
+			<li><a href="{link}">{text}</a></li>
+		{/resources}
+		<li>
+			<p>Games:</p>
+			<ul class="resources-links-games">
+				{#games}
+					<li><a href="{link}">{text}</a></li>	
+				{/games}
+			</ul>
+		</li>
+	</ul>
+	<h2>Music Apps for your Smartphone or Tablet</h2>
+	<ul class="resources-apps">
+		{#apps}
+			<li>{text}</li>
+		{/apps}
+	</ul>
+
+	<div class="home">
+		<a href="/" class="{routeClass}">
+			<div class="home-container">
+				<p>Return Home</p>
+				<i class="fa fa-home fa-3x"></i>
+			</div>
+		</a>
+	</div>
+
+{/Resources}

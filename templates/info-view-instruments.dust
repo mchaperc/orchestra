@@ -1,16 +1,42 @@
 {#Instruments}
-	<h2 class="heading">{title}</h2>
-	<p>{titleSubText}</p>
-	<ul>
-	{#content}
-		<li>
-			<h3>{subTitle}</h3>
-			<ul>
-			{#bullets}
-				<li><p>{text}</p></li>
-			{/bullets}
-			</ul>
-		</li>
-	{/content}
-	</ul>
+	<nav class="navbar">
+		<ul class="parent-info-links col-sm-10">
+			{#parentLinks}
+				<a href="{link}"><li class="parent-info-links-link"><p>{text}</p></li></a>
+			{/parentLinks}
+		</ul>
+	</nav>
+	<div class="parent-info-text jumbotron">
+		<h3 class="col-sm-10">Click one of the above links to view more information.</h3>
+	</div>
+	<section class="instruments col-sm-9">
+		<h2 class="page-header">{title}</h2>
+		<p>{titleSubText}</p>
+		<ul>
+		{#content}
+			<li>
+				<div class="card" tabindex="0">
+					<h3 class="card-left">{subTitle1}</h3>
+					<h3 class="card-right">{subTitle2}</h3>
+				</div>
+				<ul>
+				{#bullets}
+					<li>
+						<p>{text}</p>
+					</li>
+				{/bullets}
+				</ul>
+			</li>
+		{/content}
+		</ul>
+	</section>
+
+	<div class="home">
+		<a href="/" class="{routeClass}">
+			<div class="home-container">
+				<p>Return Home</p>
+				<i class="fa fa-home fa-3x"></i>
+			</div>
+		</a>
+	</div>
 {/Instruments}

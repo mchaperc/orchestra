@@ -1,5 +1,8 @@
 define(function() {
 	return {
+		routeClass: 'home-info',
+		template: 'info-view.dust',
+		className: 'info-nav',
 		parentLinks: [
 			{
 				link: '#info/instruments',

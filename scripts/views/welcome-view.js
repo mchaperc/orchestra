@@ -5,7 +5,7 @@ define([
 	'templates'
 ], 
 	function(Backbone, Marionette, dustMarionette, templates) {
-		return app.WelcomeView = Marionette.LayoutView.extend({
+		return WelcomeView = Marionette.LayoutView.extend({
 			template: 'welcome-page.dust',
 			className: 'main-container',
 

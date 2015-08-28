@@ -1,2 +1,2 @@
 <div class="upperContent"></div>
-<div class="lowerContent col-sm-10"></div>
+<div class="lowerContent col-sm-7 col-sm-offset-1"></div>

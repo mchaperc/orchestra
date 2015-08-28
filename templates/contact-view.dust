@@ -1,0 +1,23 @@
+{#Contact}
+	<h1 class="page-header">{title}</h1>
+	<p class="contact-subtext">{titleSubText}</p>
+
+	<form class="contact-form">
+		{#form}
+			<label>{infoType}</label>
+			{#inputs}
+				<input type="{type}">
+				<label>{label}</label>
+			{/inputs}
+		{/form}
+	</form>
+
+	<div class="home">
+		<a href="/" class="{routeClass}">
+			<div class="home-container">
+				<p>Return Home</p>
+				<i class="fa fa-home fa-3x"></i>
+			</div>
+		</a>
+	</div>
+{/Contact}

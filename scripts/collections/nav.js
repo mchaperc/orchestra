@@ -1,5 +1,7 @@
 define(function() {
 	return {
+
+			template: false,
 			nav: [
 				{
 					text: 'Parent Information',
