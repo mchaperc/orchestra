@@ -14,8 +14,9 @@ define(['backbone',
 			initialize: function(options) {
 				this.router = options.router;
 				this.key = options.key;
-				this.template = this.model.get(this.key).template;
-				this.className = this.model.get(this.key).className;
+				console.log(this.model);
+				this.template = this.model.get('template');
+				this.className = this.model.get('className');
 				var homeClass = Backbone.history.getFragment().split('/');
 			},
 			onRender: function() {
