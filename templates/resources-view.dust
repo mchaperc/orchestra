@@ -1,25 +1,27 @@
 {#Resources}
-
-	<h1 class="page-header">{title}</h1>
-	<ul class="resources-links">
-		{#resources}
-			<li><a href="{link}">{text}</a></li>
-		{/resources}
-		<li>
-			<p>Games:</p>
-			<ul class="resources-links-games">
-				{#games}
-					<li><a href="{link}">{text}</a></li>	
-				{/games}
-			</ul>
-		</li>
-	</ul>
-	<h2>Music Apps for your Smartphone or Tablet</h2>
-	<ul class="resources-apps">
-		{#apps}
-			<li>{text}</li>
-		{/apps}
-	</ul>
+	<section class="students col-sm-9">
+		<h1 class="page-header">{title}</h1>
+		<ul class="students-links">
+			{#resources}
+				<li>{text|s}</li>
+			{/resources}
+			<li>
+				<p><u>Games:</u></p>
+				<ul class="students-links-games">
+					{#games}
+						<li>{gameText|s}</li>	
+					{/games}
+				</ul>
+			</li>
+		</ul>
+		<h2 class="students-apps-header">Music Apps for your Smartphone or Tablet</h2>
+		<hr>
+		<ul class="students-apps">
+			{#apps}
+				<li>{text}</li>
+			{/apps}
+		</ul>
+	</section>	
 
 	<div class="home">
 		<a href="/" class="{routeClass}">
@@ -29,5 +31,4 @@
 			</div>
 		</a>
 	</div>
-
 {/Resources}

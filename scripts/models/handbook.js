@@ -39,12 +39,10 @@ define(function() {
 			heading: 'Have you misplaced your 2015-2016 Orchestra Handbook?',
 			prompts: [
 				{
-					text: 'Click here to view and print the 2015 Elementary School Handbook (5th grade).',
-					link: 'https://www.dropbox.com/s/ot4j0no6fa93c7m/ES%20Handbook%201.pdf?dl=0'
+					text: '<a href="https://www.dropbox.com/s/ot4j0no6fa93c7m/ES%20Handbook%201.pdf?dl=0">Click here</a> to view and print the 2015 Elementary School Handbook (5th grade).'
 				},
 				{
-					text: 'Click here to view and print the 2015 Middle School Handbook (6th-8th grades).',
-					link: 'https://www.dropbox.com/s/1a32b3zwby252iz/MS%20Handbook.pdf?dl=0'
+					text: '<a href="https://www.dropbox.com/s/1a32b3zwby252iz/MS%20Handbook.pdf?dl=0">Click here</a> to view and print the 2015 Middle School Handbook (6th-8th grades).'
 				}
 			]
 		}

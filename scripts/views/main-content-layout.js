@@ -17,12 +17,8 @@ define(['backbone',
 				this.template = this.model.get(this.key).template;
 				this.className = this.model.get(this.key).className;
 				var homeClass = Backbone.history.getFragment().split('/');
-				// $('div.home a').attr('class', 'home home-'+homeClass[0]); 
 			},
 			onRender: function() {
-				console.log($('.home'))
-				console.log($('.main-content'));
-				console.log($('.nav-bar'));
 			},
 			goHome: function(e) {
 				e.preventDefault();

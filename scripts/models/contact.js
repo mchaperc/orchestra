@@ -56,7 +56,7 @@ define(function() {
 			},
 			{
 				infoType: 'Comment',
-				inputs: [
+				textarea: [
 					{
 						required: true,
 						type: 'textarea'
@@ -64,9 +64,10 @@ define(function() {
 				]
 			},
 			{
-				infoType: 'Submit',
+				infoType: '',
 				inputs: [
 					{
+						action: 'mailto:mchaperc@yahoo.com',
 						type: 'submit'
 					}
 				]
@@ -91,4 +92,4 @@ define(function() {
 			]
 		}
 	}
-})
+}) 

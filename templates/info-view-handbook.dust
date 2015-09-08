@@ -13,7 +13,7 @@
 		{#additionalText}
 			<ul>
 				{#prompts}
-					<a href="{link}"><li>{text}</li></a>
+					<li>{text|s}</li>
 				{/prompts}
 			</ul>	
 		{/additionalText}

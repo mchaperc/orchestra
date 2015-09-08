@@ -12,9 +12,13 @@ define(['marionette',
 		'models/instruments',
 		'models/handbook',
 		'models/resources',
-		'models/contact'
+		'models/contact',
+		'models/7&8',
+		'models/six',
+		'models/five',
+		'models/four'
 		], 
-	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoNav, MainContentView, InstrumentView, NavColl, WelcomeText, Info, Instruments, Handbook, Resources, Contact) {
+	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoNav, MainContentView, InstrumentView, NavColl, WelcomeText, Info, Instruments, Handbook, Resources, Contact, SevenEight, Six, Five, Four) {
 		return router = Marionette.AppRouter.extend({
 			routes: {
 				'': 'index',
@@ -60,10 +64,8 @@ define(['marionette',
 			info: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app info');
-				console.log(this.info.attributes);
 				var contentView = new MainContentView({model: this.info, router: this, key: 'Info'});
 				this.welcomeView.showChildView('mainContent', contentView);
-				// this.contentView.showChildView('upperContent', new InfoNav({model: this.info}));
 			},
 			instruments: function() {
 				this.checkContent();
@@ -104,7 +106,6 @@ define(['marionette',
 				this.checkContent();
 				$('.app').attr('class', 'app resources');
 				var resources = new Backbone.Model({Resources});
-				console.log(resources);
 				var contentView = new MainContentView({model: resources, router: this, key: 'Resources'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
@@ -118,18 +119,30 @@ define(['marionette',
 			sevenEight: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app sevenEight');
+				var sevenEight = new Backbone.Model({SevenEight});
+				var contentView = new MainContentView({model: sevenEight, router: this, key: 'SevenEight'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			six: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app six');
+				var six = new Backbone.Model({Six});
+				var contentView = new MainContentView({model: six, router: this, key: 'Six'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			five: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app five');
+				var five = new Backbone.Model({Five});
+				var contentView = new MainContentView({model: five, router: this, key: 'Five'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			four: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app four');
+				var four = new Backbone.Model({Four});
+				var contentView = new MainContentView({model: four, router: this, key: 'Four'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			cleanUpInfo: function() {
 				if ($('.parent-info-text')) {
@@ -146,8 +159,10 @@ define(['marionette',
 				if (!this.app.getRegion('main').hasView()) {
 					this.app.getRegion('main').show(this.welcomeView);
 					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
-					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
-					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'});
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
+				}
+				if ($('.main-container').css('position') !== 'absolute') {
+					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'}, 500);
 				}
 			}
 		});
