@@ -52,6 +52,7 @@ body {
 .app {
   height: 100vh;
   transition: all 2s ease;
+  -webkit-transition: all 2s ease;
 }
 .main-container {
   height: 100%;
@@ -91,13 +92,16 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
 }
 .welcome-content {
   left: 5%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
   width: 90%;
 }
 .welcome-nav {
@@ -112,6 +116,7 @@ body {
 }
 .main-container {
   transition: all 1s ease;
+  -webkit-transition: all 1s ease;
 }
 .welcome-heading {
   font-family: 'Dancing Script', cursive;
@@ -123,6 +128,7 @@ body {
   border: none;
   margin-top: 1em;
   transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
 }
 .welcome-video-button:hover {
   background-color: #7cb854;
@@ -134,6 +140,7 @@ body {
   letter-spacing: .05em;
   position: relative;
   transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
 }
 .nav-item a {
   color: inherit;
@@ -147,6 +154,7 @@ body {
   right: 3%;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
 }
 .nav-item .fa {
   font-size: 1.5em;
@@ -178,6 +186,14 @@ body {
 .nav-item:last-child {
   background-color: #7cb854;
 }
+.shift-left {
+  right: 94.5%;
+  transition: all 1s ease;
+}
+.shift-right {
+  right: 0;
+  transition: all .5s ease;
+}
 .content {
   margin: 0;
   padding: 0;
@@ -200,6 +216,7 @@ body {
   height: 14.28571429vh;
   line-height: 14.28571429vh;
   transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
 }
 .parent-info-links li:hover {
   background-color: #fafafa;
@@ -274,6 +291,7 @@ body {
   background-color: #323232;
   color: #fafafa;
   transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
 }
 .instruments form input[type="submit"]:hover,
 .handbook form input[type="submit"]:hover,
@@ -431,17 +449,20 @@ body {
   right: 5%;
   text-align: center;
   transition: all .3s ease;
+  -webkit-transition: all .3s ease;
   width: 15%;
 }
 .home a {
   height: 100%;
   transition: all .3s ease;
+  -webkit-transition: all .3s ease;
   width: 100%;
 }
 .home .home-container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
   width: 100%;
 }
 .home:hover {

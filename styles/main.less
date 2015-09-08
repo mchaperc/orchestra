@@ -97,6 +97,7 @@ body {
 .app {
 	height: 100vh;
 	transition: all @very-slow-trans ease;
+	-webkit-transition: all @very-slow-trans ease;
 }
 
 .main-container {
@@ -145,6 +146,7 @@ body {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 	}
 }
 
@@ -153,7 +155,9 @@ body {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
 	transition: all @less-fast-trans ease;
+	-webkit-transition: all @less-fast-trans ease;
 	width: 90%;
 }
 
@@ -170,6 +174,7 @@ body {
 
 .main-container {
 	transition: all @slow-trans ease;
+	-webkit-transition: all @slow-trans ease;
 }
 
 .welcome-heading {
@@ -183,6 +188,7 @@ body {
 	border: none;
 	margin-top: @uno-em;
 	transition: all @fast-trans ease;
+	-webkit-transition: all @fast-trans ease;
 	&:hover {
 		background-color: @light-green;
 	}
@@ -195,6 +201,7 @@ body {
 	letter-spacing: .05em;
 	position: relative;
 	transition: all @fast-trans ease;
+	-webkit-transition: all @fast-trans ease;
 	a {
 		color: inherit;
 		display: inline-block;
@@ -206,6 +213,7 @@ body {
 			right: 3%;
 			top: 50%;
 			transform: translateY(-50%);
+			-webkit-transform: translateY(-50%);
 		}
 	}
 	.fa {
@@ -248,6 +256,16 @@ body {
 	background-color: @light-green;
 }
 
+.shift-left {
+	right: 94.5%;
+	transition: all 1s ease;
+}
+
+.shift-right {
+	right: 0;
+	transition: all .5s ease;
+}
+
 .content {
 	margin: 0;
 	padding: 0;
@@ -272,6 +290,7 @@ body {
 	height: @screen-partial;
 	line-height: @screen-partial;
 	transition: all @less-fast-trans ease;
+	-webkit-transition: all @less-fast-trans ease;
 	&:hover {
 		background-color: @white;
 		border-bottom: 2px solid @grey;
@@ -330,6 +349,7 @@ body {
 			background-color: @black;
 			color: @white;
 			transition: all @less-fast-trans ease;
+			-webkit-transition: all @less-fast-trans ease;
 			&:hover {
 				background-color: @white;
 				color: @black;
@@ -428,16 +448,19 @@ body {
 	right: 5%;
 	text-align: center;
 	transition: all .3s ease;
+	-webkit-transition: all .3s ease;
 	width: 15%;
 	a {
 		height: @fill-parent-container;
 		transition: all .3s ease;
+		-webkit-transition: all .3s ease;
 		width: @fill-parent-container;
 	}
 	.home-container {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 		width: 100%;
 	}
 }

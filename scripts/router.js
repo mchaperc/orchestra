@@ -45,7 +45,6 @@ define(['marionette',
 				this.app = app;
 				this.welcome = new Backbone.Model(WelcomeText);
 				this.info = new Backbone.Model(Info);
-				console.log('has new changes');
 				this.welcomeView = new WelcomeView({model: this.nav});
 			},
 
@@ -162,8 +161,9 @@ define(['marionette',
 					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
 					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
 				}
-				if ($('.main-container').css('position') !== 'absolute') {
-					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'}, 500);
+				if ($('.main-container').css('right') !== '94.5%') {
+					$('.main-container').removeClass('shift-right');
+					$('.main-container').addClass('shift-left');
 				}
 			}
 		});

@@ -14,7 +14,6 @@ define(['backbone',
 			initialize: function(options) {
 				this.router = options.router;
 				this.key = options.key;
-				console.log(this.model);
 				this.template = this.model.get('template');
 				this.className = this.model.get('className');
 				var homeClass = Backbone.history.getFragment().split('/');
@@ -23,7 +22,7 @@ define(['backbone',
 			},
 			goHome: function(e) {
 				e.preventDefault();
-				$('.main-container').animate({'right': '0%'}, 200);
+				$('.main-container').addClass('shift-right');
 				this.router.navigate('/', true);
 			}
 		})

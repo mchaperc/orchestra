@@ -2217,7 +2217,6 @@ define(['marionette',
 				this.app = app;
 				this.welcome = new Backbone.Model(WelcomeText);
 				this.info = new Backbone.Model(Info);
-				console.log('has new changes');
 				this.welcomeView = new WelcomeView({model: this.nav});
 			},
 
@@ -2334,8 +2333,9 @@ define(['marionette',
 					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
 					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
 				}
-				if ($('.main-container').css('position') !== 'absolute') {
-					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'}, 500);
+				if ($('.main-container').css('right') !== '94.5%') {
+					$('.main-container').removeClass('shift-right');
+					$('.main-container').addClass('shift-left');
 				}
 			}
 		});
@@ -2885,7 +2885,6 @@ define(['backbone',
 			initialize: function(options) {
 				this.router = options.router;
 				this.key = options.key;
-				console.log(this.model);
 				this.template = this.model.get('template');
 				this.className = this.model.get('className');
 				var homeClass = Backbone.history.getFragment().split('/');
@@ -2894,7 +2893,7 @@ define(['backbone',
 			},
 			goHome: function(e) {
 				e.preventDefault();
-				$('.main-container').animate({'right': '0%'}, 200);
+				$('.main-container').addClass('shift-right');
 				this.router.navigate('/', true);
 			}
 		})
@@ -2941,7 +2940,7 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 			},
 			showContent: function(e) {
 				e.preventDefault();
-				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500);
+				$('.main-container').addClass('shift-left');
 				this.router.navigate($(e.currentTarget).attr('href'), true);
 			}
 		})
