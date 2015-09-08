@@ -14,6 +14,7 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 			},
 			showContent: function(e) {
 				e.preventDefault();
+				$('.main-container').removeClass('shift-right');
 				$('.main-container').addClass('shift-left');
 				this.router.navigate($(e.currentTarget).attr('href'), true);
 			}

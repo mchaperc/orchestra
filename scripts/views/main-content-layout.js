@@ -22,6 +22,7 @@ define(['backbone',
 			},
 			goHome: function(e) {
 				e.preventDefault();
+				$('.main-container').removeClass('shift-left');
 				$('.main-container').addClass('shift-right');
 				this.router.navigate('/', true);
 			}
