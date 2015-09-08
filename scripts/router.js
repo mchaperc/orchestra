@@ -70,7 +70,7 @@ define(['marionette',
 			instruments: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app info');
-				var instruments = new Backbone.Model({Instruments});
+				var instruments = new Backbone.Model(Instruments);
 				var contentView = new MainContentView({model: instruments, router: this, key: 'Instruments'});
 				this.welcomeView.showChildView('mainContent', contentView);
 				this.cleanUpInfo();
@@ -78,7 +78,7 @@ define(['marionette',
 			handbook: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app info');
-				var handbook = new Backbone.Model({Handbook});
+				var handbook = new Backbone.Model(Handbook);
 				var contentView = new MainContentView({model: handbook, router: this, key: 'Handbook'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
@@ -105,42 +105,42 @@ define(['marionette',
 			resources: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app resources');
-				var resources = new Backbone.Model({Resources});
+				var resources = new Backbone.Model(Resources);
 				var contentView = new MainContentView({model: resources, router: this, key: 'Resources'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			contact: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app contact');
-				var contact = new Backbone.Model({Contact});
+				var contact = new Backbone.Model(Contact);
 				var contentView = new MainContentView({model: contact, router: this, key: 'Contact'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			sevenEight: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app sevenEight');
-				var sevenEight = new Backbone.Model({SevenEight});
+				var sevenEight = new Backbone.Model(SevenEight);
 				var contentView = new MainContentView({model: sevenEight, router: this, key: 'SevenEight'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			six: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app six');
-				var six = new Backbone.Model({Six});
+				var six = new Backbone.Model(Six);
 				var contentView = new MainContentView({model: six, router: this, key: 'Six'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			five: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app five');
-				var five = new Backbone.Model({Five});
+				var five = new Backbone.Model(Five);
 				var contentView = new MainContentView({model: five, router: this, key: 'Five'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			four: function() {
 				this.checkContent();
 				$('.app').attr('class', 'app four');
-				var four = new Backbone.Model({Four});
+				var four = new Backbone.Model(Four);
 				var contentView = new MainContentView({model: four, router: this, key: 'Four'});
 				this.welcomeView.showChildView('mainContent', contentView);
 			},
