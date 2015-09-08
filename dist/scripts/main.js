@@ -2214,7 +2214,6 @@ define(['marionette',
 				this.nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
 					return item;
 				}));
-				this.$mainContainer = $('.main-container');
 				this.app = app;
 				this.welcome = new Backbone.Model(WelcomeText);
 				this.info = new Backbone.Model(Info);
@@ -2223,10 +2222,12 @@ define(['marionette',
 
 			index: function() {
 				if (this.app.getRegion('main').hasView()) {
-					this.$mainContainer.removeClass('shift-left');
-					this.$mainContainer.addClass('shift-right');
+					$('.main-container').removeClass('shift-left');
+					$('.main-container').addClass('shift-right');
 				} else {
 					this.app.getRegion('main').show(this.welcomeView);
+					$('.main-container').removeClass('shift-left');
+					$('.main-container').addClass('shift-right');
 					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
 					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
 				}
@@ -2335,9 +2336,9 @@ define(['marionette',
 					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
 					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
 				}
-				if (this.$mainContainer.css('right') !== '94.5%') {
-					this.$mainContainer.removeClass('shift-right');
-					this.$mainContainer.addClass('shift-left');
+				if ($('.main-container').css('right') !== '94.5%') {
+					$('.main-container').removeClass('shift-right');
+					$('.main-container').addClass('shift-left');
 				}
 			}
 		});
@@ -2384,6 +2385,130 @@ define(function() {
 				}
 		]}
 })
+define(['backbone', 'marionette', 'templates'], 
+	function(Backbone, Marionette, templates) {
+		return infoView = Marionette.ItemView.extend({
+			template: 'info-view.dust',
+			tagName: 'section',
+			className: 'content info-container',
+			events: {
+			},
+			initialize: function() {
+				console.log('hello');
+			},
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'templates'
+		], 
+	function(Backbone, Marionette, templates) {
+		return InfoViewInstruments = Marionette.ItemView.extend({
+			template: 'info-view-instruments.dust',
+			className: 'instruments',
+			tagName: 'section',
+			events: {
+
+			}
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'backbone.marionette.dust', 
+		'templates'
+], 
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return MainContentLayout = Marionette.LayoutView.extend({
+			regions: {
+				contentContainer: '.contentContainer'
+			},
+			events: {
+				'click .home': 'goHome'
+			},
+			initialize: function(options) {
+				this.router = options.router;
+				this.key = options.key;
+				this.template = this.model.get('template');
+				this.className = this.model.get('className');
+				var homeClass = Backbone.history.getFragment().split('/');
+			},
+			onRender: function() {
+			},
+			goHome: function(e) {
+				e.preventDefault();
+				$('.main-container').removeClass('shift-left');
+				$('.main-container').addClass('shift-right');
+				this.router.navigate('/', true);
+			}
+		})
+	})
+define(['marionette', 'backbone'],
+	function(Marionette, Backbone) {
+		return WelcomeViewMain = Marionette.ItemView.extend({
+			template: 'welcome-view-main.dust',
+			className: 'welcome-content col-md-11',
+			events: {
+				'click .welcome-video-button': 'showVideo'
+			},
+			initialize: function() {
+				
+			},
+			showVideo: function(e) {
+				e.preventDefault();
+				$('.welcome-content').hide();
+				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
+			}
+		})
+	})
+define(['marionette', 'backbone'], 
+	function(Marionette, Backbone) {
+		return navItemView = Marionette.ItemView.extend({
+			template: 'welcome-view-nav-item.dust',
+			className: 'nav-item',
+			tagName: 'li'
+		})
+	})
+define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
+	function(Marionette, Backbone, NavItemView) {
+		var navItem = NavItemView;
+		return NavView = Marionette.CollectionView.extend({
+			template: 'welcome-view-nav.dust',
+			className: 'welcome-view-nav',
+			tagName: 'ul',
+			childView: navItem,
+			events: {
+				'click .nav-item > a': 'showContent'
+			},
+			initialize: function(options) {
+				this.router = options.router
+			},
+			showContent: function(e) {
+				e.preventDefault();
+				$('.main-container').removeClass('shift-right');
+				$('.main-container').addClass('shift-left');
+				this.router.navigate($(e.currentTarget).attr('href'), true);
+			}
+		})
+	})
+define([
+	'backbone', 
+	'marionette', 
+	'backbone.marionette.dust',
+	'templates'
+], 
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return WelcomeView = Marionette.LayoutView.extend({
+			template: 'welcome-page.dust',
+			className: 'main-container',
+
+			regions: {
+				main: '.welcome-text',
+				nav: '.welcome-nav',
+				mainContent: '.main-content'
+			}
+
+		});
+});
 define(function() {
 	return {
 		template: '7&8-view.dust',
@@ -2844,128 +2969,4 @@ define(function() {
 			subText: 'Welcome! This year, we are participating in regular classroom structure and also exploring "blended learning." This means we will be using tablets and phones in class to watch videos and answer questions, create, explore student-led learning, and engage in lots of fun! To find out more about blended learning, you can click <a href="https://www.khanacademy.org/partner-content/ssf-cci/sscc-intro-blended-learning">here</a> to visit the Khan Academy for in-depth information - or, you can <a href="/#contact">contact Mrs. C</a> if you have any questions.'
 		}
 	});
-define(['backbone', 'marionette', 'templates'], 
-	function(Backbone, Marionette, templates) {
-		return infoView = Marionette.ItemView.extend({
-			template: 'info-view.dust',
-			tagName: 'section',
-			className: 'content info-container',
-			events: {
-			},
-			initialize: function() {
-				console.log('hello');
-			},
-		})
-	})
-define(['backbone', 
-		'marionette', 
-		'templates'
-		], 
-	function(Backbone, Marionette, templates) {
-		return InfoViewInstruments = Marionette.ItemView.extend({
-			template: 'info-view-instruments.dust',
-			className: 'instruments',
-			tagName: 'section',
-			events: {
-
-			}
-		})
-	})
-define(['backbone', 
-		'marionette', 
-		'backbone.marionette.dust', 
-		'templates'
-], 
-	function(Backbone, Marionette, dustMarionette, templates) {
-		return MainContentLayout = Marionette.LayoutView.extend({
-			regions: {
-				contentContainer: '.contentContainer'
-			},
-			events: {
-				'click .home': 'goHome'
-			},
-			initialize: function(options) {
-				this.router = options.router;
-				this.key = options.key;
-				this.template = this.model.get('template');
-				this.className = this.model.get('className');
-				var homeClass = Backbone.history.getFragment().split('/');
-			},
-			onRender: function() {
-			},
-			goHome: function(e) {
-				e.preventDefault();
-				$('.main-container').removeClass('shift-left');
-				$('.main-container').addClass('shift-right');
-				this.router.navigate('/', true);
-			}
-		})
-	})
-define(['marionette', 'backbone'],
-	function(Marionette, Backbone) {
-		return WelcomeViewMain = Marionette.ItemView.extend({
-			template: 'welcome-view-main.dust',
-			className: 'welcome-content col-md-11',
-			events: {
-				'click .welcome-video-button': 'showVideo'
-			},
-			initialize: function() {
-				
-			},
-			showVideo: function(e) {
-				e.preventDefault();
-				$('.welcome-content').hide();
-				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
-			}
-		})
-	})
-define(['marionette', 'backbone'], 
-	function(Marionette, Backbone) {
-		return navItemView = Marionette.ItemView.extend({
-			template: 'welcome-view-nav-item.dust',
-			className: 'nav-item',
-			tagName: 'li'
-		})
-	})
-define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
-	function(Marionette, Backbone, NavItemView) {
-		var navItem = NavItemView;
-		return NavView = Marionette.CollectionView.extend({
-			template: 'welcome-view-nav.dust',
-			className: 'welcome-view-nav',
-			tagName: 'ul',
-			childView: navItem,
-			events: {
-				'click .nav-item > a': 'showContent'
-			},
-			initialize: function(options) {
-				this.router = options.router
-			},
-			showContent: function(e) {
-				e.preventDefault();
-				$('.main-container').removeClass('shift-right');
-				$('.main-container').addClass('shift-left');
-				this.router.navigate($(e.currentTarget).attr('href'), true);
-			}
-		})
-	})
-define([
-	'backbone', 
-	'marionette', 
-	'backbone.marionette.dust',
-	'templates'
-], 
-	function(Backbone, Marionette, dustMarionette, templates) {
-		return WelcomeView = Marionette.LayoutView.extend({
-			template: 'welcome-page.dust',
-			className: 'main-container',
-
-			regions: {
-				main: '.welcome-text',
-				nav: '.welcome-nav',
-				mainContent: '.main-content'
-			}
-
-		});
-});
 //# sourceMappingURL=main.js.map
