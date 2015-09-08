@@ -2217,6 +2217,7 @@ define(['marionette',
 				this.app = app;
 				this.welcome = new Backbone.Model(WelcomeText);
 				this.info = new Backbone.Model(Info);
+				console.log('has new changes');
 				this.welcomeView = new WelcomeView({model: this.nav});
 			},
 
