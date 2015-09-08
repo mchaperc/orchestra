@@ -1,0 +1,36 @@
+{#SevenEight}
+	{#about}
+		<div class="blog-posts col-sm-5 col-sm-offset-2">
+			{#posts}
+				<div class="blog-posts-item">
+					<h2 class="blog-posts-item-heading">{title}</h2>
+					<p class="blog-posts-item-date">{date}</p>
+					{#content}
+						<div class="blog-posts-item-content">
+							{?contentTitle}
+								<h3 class="content-title">{contentTitle}</h3>
+							{:else}
+								<p class="content-text">{text}</p>
+							{/contentTitle}
+							{video|s}
+						</div>
+						<hr>
+					{/content}
+				</div>
+			{/posts}
+		</div>
+		<div class="about col-sm-3 col-sm-offset-1">
+			<h2 class="blog-about-heading">{title}</h2>
+			<img src="{img}" alt="" class="blog-about-img">
+			<p class="blog-about-text">{aboutText}</p>
+		</div>
+	{/about}
+	<div class="home">
+	<a href="/" class="{routeClass}">
+		<div class="home-container">
+			<p>Return Home</p>
+			<i class="fa fa-home fa-3x"></i>
+		</div>
+	</a>
+</div>
+{/SevenEight}

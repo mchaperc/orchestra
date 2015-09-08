@@ -1,0 +1,33 @@
+{#Contact}
+	<section class="contact-page col-sm-7">
+		<h1 class="page-header">{title}</h1>
+		<p class="contact-subtext">{titleSubText}</p>
+
+		<form class="contact-form">
+			{#form}
+				<div class="input-container">
+					<label class="main-label">{?infoType}{infoType}:{/infoType}</label>
+					{#inputs}
+						<div class="input-with-sub">
+							<input type="{type}">
+							<label class="sub-label">{label}</label>
+						</div>	
+					{:else}
+						<div class="input-with-sub">
+							<textarea></textarea>
+						</div>	
+					{/inputs}
+				</div>					
+			{/form}
+		</form>
+	</section>
+
+	<div class="home">
+		<a href="/" class="{routeClass}">
+			<div class="home-container">
+				<p>Return Home</p>
+				<i class="fa fa-home fa-3x"></i>
+			</div>
+		</a>
+	</div>
+{/Contact}

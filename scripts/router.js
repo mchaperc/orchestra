@@ -1,9 +1,35 @@
-define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main', 'views/welcome-view-nav', 'collections/nav', 'models/welcome'], 
-	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, NavColl, WelcomeText) {
-		app.router = Marionette.AppRouter.extend({
+define(['marionette', 
+		'backbone', 
+		'views/welcome-view', 
+		'views/welcome-view-main', 
+		'views/welcome-view-nav', 
+		'views/info-nav',
+		'views/main-content-layout',
+		'views/info-view-instruments',
+		'collections/nav', 
+		'models/welcome', 
+		'models/info', 
+		'models/instruments',
+		'models/handbook',
+		'models/resources',
+		'models/contact',
+		'models/7&8',
+		'models/six',
+		'models/five',
+		'models/four'
+		], 
+	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoNav, MainContentView, InstrumentView, NavColl, WelcomeText, Info, Instruments, Handbook, Resources, Contact, SevenEight, Six, Five, Four) {
+		return router = Marionette.AppRouter.extend({
 			routes: {
 				'': 'index',
 				'info': 'info',
+				'info/instruments': 'instruments',
+				'info/handbook': 'handbook',
+				'info/calendar': 'calendar',
+				'info/stores': 'stores',
+				'info/donors': 'donors',
+				'info/edmodo': 'edmodo',
+				'info/remind': 'remind',
 				'resources': 'resources',
 				'contact': 'contact',
 				'7&8': 'sevenEight',
@@ -11,44 +37,133 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 				'5': 'five',
 				'4': 'four'
 			},
-			index: function() {
-				var stuff = new Backbone.Model({text: 'Some text', nav: 'a few links could go here'});
-				var nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
+
+			initialize: function(app) {
+				this.nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
 					return item;
 				}));
-				var welcome = new Backbone.Model(WelcomeText);
-				var welcomeView = new WelcomeView({model: nav});
-				if ($('.app').html()) {
-					$('.main-container').animate({'right': '0%'}, 500)
+				this.app = app;
+				this.welcome = new Backbone.Model(WelcomeText);
+				this.info = new Backbone.Model({Info});
+				this.welcomeView = new WelcomeView({model: this.nav});
+			},
+
+			index: function() {
+				if (this.app.getRegion('main').hasView()) {
+					$('.main-container').animate({'right': '0%'}, 500);
 				} else {
-					$('.app').append(welcomeView.render().el);
-					welcomeView.showChildView('main', new WelcomeMainView({model: welcome}));
-					welcomeView.showChildView('nav', new NavView({collection: nav, router: this}));
+					this.app.getRegion('main').show(this.welcomeView);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
+				}
+				if ($('.welcome-content:hidden')) {
+					$('iframe').remove();
+					$('.welcome-content').show();
 				}
 			},
 			info: function() {
-				console.log('info');
-				$('.app').css({'background-color': '#F2B701'});
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var contentView = new MainContentView({model: this.info, router: this, key: 'Info'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			instruments: function() {
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var instruments = new Backbone.Model({Instruments});
+				var contentView = new MainContentView({model: instruments, router: this, key: 'Instruments'});
+				this.welcomeView.showChildView('mainContent', contentView);
+				this.cleanUpInfo();
+			},
+			handbook: function() {
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var handbook = new Backbone.Model({Handbook});
+				var contentView = new MainContentView({model: handbook, router: this, key: 'Handbook'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			calendar: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			stores: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			donors: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			edmodo: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			remind: function() {
+				this.checkContent();
+				this.cleanUpInfo();
 			},
 			resources: function() {
-				$('.app').css({'background-color': '#E57D04'});
+				this.checkContent();
+				$('.app').attr('class', 'app resources');
+				var resources = new Backbone.Model({Resources});
+				var contentView = new MainContentView({model: resources, router: this, key: 'Resources'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			contact: function() {
-				$('.app').css({'background-color': '#DC0030'});
+				this.checkContent();
+				$('.app').attr('class', 'app contact');
+				var contact = new Backbone.Model({Contact});
+				var contentView = new MainContentView({model: contact, router: this, key: 'Contact'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			sevenEight: function() {
-				$('.app').css({'background-color': '#B10058'});
+				this.checkContent();
+				$('.app').attr('class', 'app sevenEight');
+				var sevenEight = new Backbone.Model({SevenEight});
+				var contentView = new MainContentView({model: sevenEight, router: this, key: 'SevenEight'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			six: function() {
-				$('.app').css({'background-color': '#7C378A'});
+				this.checkContent();
+				$('.app').attr('class', 'app six');
+				var six = new Backbone.Model({Six});
+				var contentView = new MainContentView({model: six, router: this, key: 'Six'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			five: function() {
-				$('.app').css({'background-color': '#09A275'});
+				this.checkContent();
+				$('.app').attr('class', 'app five');
+				var five = new Backbone.Model({Five});
+				var contentView = new MainContentView({model: five, router: this, key: 'Five'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			four: function() {
-				$('.app').css({'background-color': '#7CB854'});
+				this.checkContent();
+				$('.app').attr('class', 'app four');
+				var four = new Backbone.Model({Four});
+				var contentView = new MainContentView({model: four, router: this, key: 'Four'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			cleanUpInfo: function() {
+				if ($('.parent-info-text')) {
+					$('.parent-info-text').remove();
+				}
+				$('.parent-info-links li').each(function(index, value) {
+					if ($(value).hasClass('selected')) {
+						$(value).removeClass('selected');
+					}
+				})
+				$('a[href="'+ '#' + Backbone.history.getFragment() + '"] li').addClass('selected');
+			},
+			checkContent: function() {
+				if (!this.app.getRegion('main').hasView()) {
+					this.app.getRegion('main').show(this.welcomeView);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
+				}
+				if ($('.main-container').css('position') !== 'absolute') {
+					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'}, 500);
+				}
 			}
 		});
-		var router = new app.router();
-		return router;
 	});

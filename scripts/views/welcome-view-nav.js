@@ -1,7 +1,7 @@
 define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
 	function(Marionette, Backbone, NavItemView) {
 		var navItem = NavItemView;
-		return app.NavView = Marionette.CollectionView.extend({
+		return NavView = Marionette.CollectionView.extend({
 			template: 'welcome-view-nav.dust',
 			className: 'welcome-view-nav',
 			tagName: 'ul',
@@ -14,7 +14,7 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 			},
 			showContent: function(e) {
 				e.preventDefault();
-				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500)
+				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500);
 				this.router.navigate($(e.currentTarget).attr('href'), true);
 			}
 		})

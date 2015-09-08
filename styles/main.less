@@ -1,9 +1,10 @@
 * {
 	box-sizing: border-box;
 }
-
+//Colors
 @black: rgb(50,50,50);
-@yellow: #F2B701;
+@grey: rgb(120,120,120);
+@yellow: rgb(242, 183, 1);
 @orange: #E57D04;
 @white: rgb(250,250,250);
 @red: #DC0030;
@@ -12,6 +13,79 @@
 @blue: #3465AA;
 @green: #09A275;
 @light-green: #7CB854;
+
+//Other
+@off-left: 5.5%;
+@font-plus-twenty-per: 1.2em;
+@standard-plus-fifty: 1.5em;
+@big-font: 4em;
+@uno-em: 1em;
+@screen-height: 100vh;
+@fast-trans: .2s;
+@less-fast-trans: .3s;
+@medium-trans: .5s;
+@slow-trans: 1s;
+@very-slow-trans: 2s;
+@fill-parent-container: 100%;
+@semi-circle: 50%;
+@screen-partial: @screen-height/7;
+
+
+.info {
+	background-color: @yellow;
+}
+
+.home-info {
+	color: @yellow;
+}
+
+.resources {
+	background-color: @orange;
+}
+
+.home-resources {
+	color: @orange;
+}
+
+.contact {
+	background-color: @red;
+}
+
+.home-contact {
+	color: @red;
+}
+
+.sevenEight {
+	background-color: @pink;
+}
+
+.home-sevenEight {
+	color: @pink;
+}
+
+.six {
+	background-color: @purple;
+}
+
+.home-six {
+	color: @purple;
+}
+
+.five {
+	background-color: @green;
+}
+
+.home-five {
+	color: @green;
+}
+
+.four {
+	background-color: @light-green;
+}
+
+.home-four {
+	color: @light-green;
+}
 
 body {
 	background-color: @white;
@@ -22,64 +96,110 @@ body {
 
 .app {
 	height: 100vh;
-	transition: all 3s ease;
+	transition: all @very-slow-trans ease;
 }
 
 .main-container {
-	height: 100%;
+	height: @fill-parent-container;
 	position: relative;
 }
 
+.main-content {
+	color: @white;
+	font-weight: 300;
+	height: @screen-height;
+	left: 100%;
+	overflow: auto;
+	padding: 0;
+	position: absolute;
+	width: @fill-parent-container;
+	iframe {
+		margin: 2em 0;
+	}
+}
+
+.main-content-container {
+	height: @fill-parent-container;
+}
+
 .welcome-text {
-	background-color: white;
-	border-bottom-right-radius: 50%;
-	border-top-right-radius: 50%;
+	// background-color: @black;
+	// background-image: url('http://www.seattlechambermusic.org/wp-content/themes/scms/img/20-background.jpg');
+	// background-position: 80% @fill-parent-container;
+	// background-repeat: no-repeat;
+	// background-size: cover;
+	background-color: @white;
+	border-bottom-right-radius: @semi-circle;
+	border-top-right-radius: @semi-circle;
 	clear: both;
+	// color: @white;
+	color: @black;
 	height: 130vh;
 	position: absolute;
+	text-align: left;
 	top: -15vh;
-	z-index: 1;
+	z-index: 2;
+	iframe {
+		left: 7%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
 }
 
 .welcome-content {
+	left: 5%;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	transition: all .3s ease;
+	transition: all @less-fast-trans ease;
+	width: 90%;
 }
 
 .welcome-nav {
 	padding: 0;
 	position: absolute;
-	-webkit-transition: 1s all ease;
-	-moz-transition: 1s all ease;
-	-ms-transition: 1s all ease;
-	-o-transition: 1s all ease;
-	transition: 1s all ease;
+	-webkit-transition: @slow-trans all ease;
+	-moz-transition: @slow-trans all ease;
+	-ms-transition: @slow-trans all ease;
+	-o-transition: @slow-trans all ease;
+	transition: @slow-trans all ease;
+	z-index: 1;
 }
 
 .main-container {
-	transition: all 1s ease;
+	transition: all @slow-trans ease;
 }
 
-.slide-left {
-	right: 94.5%;
-	transition: all 1s ease;
+.welcome-heading {
+	font-family: 'Dancing Script', cursive;
+	font-size: @big-font;
+	font-weight: 300;
+}
+
+.welcome-video-button {
+	background-color: @green;
+	border: none;
+	margin-top: @uno-em;
+	transition: all @fast-trans ease;
+	&:hover {
+		background-color: @light-green;
+	}
 }
 
 .nav-item {
 	color: white;
-	font-size: 1.2em;
-	height: 14.3vh;
+	font-size: @font-plus-twenty-per;
+	height: @screen-partial;
 	letter-spacing: .05em;
 	position: relative;
-	transition: all .2s ease;
+	transition: all @fast-trans ease;
 	a {
-		color: white;
+		color: inherit;
 		display: inline-block;
-		height: 100%;
-		width: 100%;
-		z-index: 4;
+		height: @fill-parent-container;
+		width: @fill-parent-container;
+		z-index: 10;
 		.nav-text {
 			position: absolute;
 			right: 3%;
@@ -88,22 +208,15 @@ body {
 		}
 	}
 	.fa {
-		font-size: 1.5em;
-		margin-left: 1.5em;
+		font-size: @standard-plus-fifty;
+		margin-left: @standard-plus-fifty;
 		vertical-align: middle;
 	}
 }
 
-iframe {
-	left: 7%;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
 .nav-item:hover {
 	cursor: pointer;
-	height: 15vh;
+	height: @screen-height/6;
 }
 
 .nav-item:first-child {
@@ -132,4 +245,227 @@ iframe {
 
 .nav-item:last-child {
 	background-color: @light-green;
+}
+
+.content {
+	margin: 0;
+	padding: 0;
+	z-index: 5;
+}
+
+.navbar {
+	opacity: 1;
+	padding-left: 0;
+	position: relative;
+	margin-top: -1px;
+	transition: all @less-fast-trans ease;
+	width: 94.5%;
+	z-index: 5;
+}
+
+.parent-info-links li {
+	color: @white;
+	display: inline-block;
+	font-size: @font-plus-twenty-per;
+	padding: 0em @uno-em;
+	height: @screen-partial;
+	line-height: @screen-partial;
+	transition: all @less-fast-trans ease;
+	&:hover {
+		background-color: @white;
+		border-bottom: 2px solid @grey;
+		color: @grey;
+	}
+}
+
+.selected {
+	background-color: @white;
+	border-bottom: 2px solid @grey;
+	p {
+		color: @grey;
+	}
+}
+
+.jumbotron {
+	color: @black;
+}
+
+.parent-info-text {
+	height: @screen-partial;
+	line-height: @screen-partial;
+	padding: 0;
+	position: absolute;
+	top: @screen-partial;
+	width: @fill-parent-container;
+	z-index: 5;
+	h3 {
+		line-height: @screen-partial;
+		margin: 0;
+	}
+}
+
+.instruments, .handbook, .students, .contact-page {
+	color: @white;
+	padding: 2em 2em 2em 5em;
+	position: relative;
+	text-align: left;
+	z-index: 0;
+	a {
+		color: @black;
+	}
+	form {
+		margin-top: 2em;
+		.main-label {
+			display: block;
+		}
+		input {
+			border: none;
+			border-radius: 3px;
+			color: @black;
+			font-size: @font-plus-twenty-per;
+			padding: .3em;
+		}
+		input[type="submit"] {
+			background-color: @black;
+			color: @white;
+			transition: all @less-fast-trans ease;
+			&:hover {
+				background-color: @white;
+				color: @black;
+			}
+		}
+		textarea {
+			width: 300px;
+		}
+		.input-container {
+			.input-with-sub {
+				display: inline-block;
+				margin-right: 1em;
+				padding-bottom: 2em;
+				position: relative;
+			}
+			.sub-label {
+				position: absolute;
+				bottom: 0;
+				font-weight: 100;
+				left: 0;
+			}
+		}
+	}
+	.card {
+		background-color: rgb(255, 203, 21);
+		color: @yellow;
+		height: @screen-partial;
+		margin-left: 25%;
+		margin-bottom: 2em;
+		margin-top: 2em;
+		width: 50%;
+		&:hover, &:active {
+			background-color: @white;
+			color: @yellow;
+		}
+		&:hover .card-right, &:active .card-right {
+			color: @yellow;
+		}
+		h3 { 
+			font-size: 2.2em;
+			font-weight: 300;
+			height: @fill-parent-container;
+		}
+		.card-left, .card-right {
+			display: inline-block;
+			height: @fill-parent-container;
+			line-height: @screen-partial;
+			margin: 0;
+		}
+		.card-left {
+			padding-right: .5em;
+			text-align: right;
+			width: 40%;
+		}
+		.card-right {
+			color: rgb(255, 203, 21);
+			text-align: left;
+			width: 60%;
+		}
+	}
+	h2, h1{
+		color: white;
+		font-size: 4em;
+		font-weight: 300;
+	}
+	.students-apps-header {
+		font-size: 3em;
+	}
+	.students-apps {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+	}
+	ul > li {
+		margin-bottom: 1em;
+	}
+	li ul li {
+		color: @white;
+		display: inline-block;
+		font-size: .9em;
+		list-style: circle;
+		margin-right: 5%;
+		vertical-align: top;
+		width: 45%;
+	}
+}
+
+.home {
+	background-color: @white;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	bottom: 0;
+	font-size: 1.5em;
+	height: @screen-partial*1.5;
+	position: fixed;
+	right: 5%;
+	text-align: center;
+	transition: all .3s ease;
+	width: 15%;
+	a {
+		height: @fill-parent-container;
+		transition: all .3s ease;
+		width: @fill-parent-container;
+	}
+	.home-container {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
+	}
+}
+
+.home:hover {
+	background-color: @black;
+	cursor: pointer;
+}
+
+.home:hover a {
+	color: @white;
+}
+
+.blog-posts {
+	margin-top: 3em;
+}
+
+.about {
+	margin-top: 3em;
+	img {
+		border-radius: 5px;
+		margin: 1.5em 0;
+	}
+	p {
+		border-bottom: 1px solid @white; 
+		border-left: 1px solid @white;
+		margin: auto;
+		padding: 1em;
+		text-align: left;
+		width: 80%;
+	}
 }

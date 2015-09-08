@@ -1,4 +1,5 @@
-<h1 class="welcome-banner">{main}</h1>
-<p class="welcome-subtext">{subText}</p>
+<h1 class="welcome-heading page-header">{title}</h1>
+<h2 class="welcome-banner">{main}</h1>
+<p class="welcome-subtext">{subText|s}</p>
 <p class="welcome-sublink">{sublink}</p>
-<button class="welcome-video-button btn btn-primary">{buttonText}</button>
+<button class="welcome-video-button btn btn-lg btn-primary">{buttonText}</button>
