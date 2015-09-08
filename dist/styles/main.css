@@ -1,6 +1,48 @@
 * {
   box-sizing: border-box;
 }
+.info {
+  background-color: #f2b701;
+}
+.home-info {
+  color: #f2b701;
+}
+.resources {
+  background-color: #e57d04;
+}
+.home-resources {
+  color: #e57d04;
+}
+.contact {
+  background-color: #dc0030;
+}
+.home-contact {
+  color: #dc0030;
+}
+.sevenEight {
+  background-color: #b10058;
+}
+.home-sevenEight {
+  color: #b10058;
+}
+.six {
+  background-color: #7c378a;
+}
+.home-six {
+  color: #7c378a;
+}
+.five {
+  background-color: #09a275;
+}
+.home-five {
+  color: #09a275;
+}
+.four {
+  background-color: #7cb854;
+}
+.home-four {
+  color: #7cb854;
+}
 body {
   background-color: #fafafa;
   color: #323232;
@@ -9,27 +51,53 @@ body {
 }
 .app {
   height: 100vh;
-  transition: all 3s ease;
+  transition: all 2s ease;
 }
 .main-container {
   height: 100%;
   position: relative;
 }
+.main-content {
+  color: #fafafa;
+  font-weight: 300;
+  height: 100vh;
+  left: 100%;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+}
+.main-content iframe {
+  margin: 2em 0;
+}
+.main-content-container {
+  height: 100%;
+}
 .welcome-text {
-  background-color: white;
+  background-color: #fafafa;
   border-bottom-right-radius: 50%;
   border-top-right-radius: 50%;
   clear: both;
+  color: #323232;
   height: 130vh;
   position: absolute;
+  text-align: left;
   top: -15vh;
-  z-index: 1;
+  z-index: 2;
 }
-.welcome-content {
+.welcome-text iframe {
+  left: 7%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: all .3s ease;
+}
+.welcome-content {
+  left: 5%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  width: 90%;
 }
 .welcome-nav {
   padding: 0;
@@ -39,28 +107,39 @@ body {
   -ms-transition: 1s all ease;
   -o-transition: 1s all ease;
   transition: 1s all ease;
+  z-index: 1;
 }
 .main-container {
   transition: all 1s ease;
 }
-.slide-left {
-  right: 94.5%;
-  transition: all 1s ease;
+.welcome-heading {
+  font-family: 'Dancing Script', cursive;
+  font-size: 4em;
+  font-weight: 300;
+}
+.welcome-video-button {
+  background-color: #09a275;
+  border: none;
+  margin-top: 1em;
+  transition: all 0.2s ease;
+}
+.welcome-video-button:hover {
+  background-color: #7cb854;
 }
 .nav-item {
   color: white;
   font-size: 1.2em;
-  height: 14.3vh;
+  height: 14.28571429vh;
   letter-spacing: .05em;
   position: relative;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 .nav-item a {
-  color: white;
+  color: inherit;
   display: inline-block;
   height: 100%;
   width: 100%;
-  z-index: 4;
+  z-index: 10;
 }
 .nav-item a .nav-text {
   position: absolute;
@@ -73,15 +152,9 @@ body {
   margin-left: 1.5em;
   vertical-align: middle;
 }
-iframe {
-  left: 7%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
 .nav-item:hover {
   cursor: pointer;
-  height: 15vh;
+  height: 16.66666667vh;
 }
 .nav-item:first-child {
   background-color: #f2b701;
@@ -103,4 +176,295 @@ iframe {
 }
 .nav-item:last-child {
   background-color: #7cb854;
+}
+.content {
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+}
+.navbar {
+  opacity: 1;
+  padding-left: 0;
+  position: relative;
+  margin-top: -1px;
+  transition: all 0.3s ease;
+  width: 94.5%;
+  z-index: 5;
+}
+.parent-info-links li {
+  color: #fafafa;
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 0em 1em;
+  height: 14.28571429vh;
+  line-height: 14.28571429vh;
+  transition: all 0.3s ease;
+}
+.parent-info-links li:hover {
+  background-color: #fafafa;
+  border-bottom: 2px solid #787878;
+  color: #787878;
+}
+.selected {
+  background-color: #fafafa;
+  border-bottom: 2px solid #787878;
+}
+.selected p {
+  color: #787878;
+}
+.jumbotron {
+  color: #323232;
+}
+.parent-info-text {
+  height: 14.28571429vh;
+  line-height: 14.28571429vh;
+  padding: 0;
+  position: absolute;
+  top: 14.28571429vh;
+  width: 100%;
+  z-index: 5;
+}
+.parent-info-text h3 {
+  line-height: 14.28571429vh;
+  margin: 0;
+}
+.instruments,
+.handbook,
+.students,
+.contact-page {
+  color: #fafafa;
+  padding: 2em 2em 2em 5em;
+  position: relative;
+  text-align: left;
+  z-index: 0;
+}
+.instruments a,
+.handbook a,
+.students a,
+.contact-page a {
+  color: #323232;
+}
+.instruments form,
+.handbook form,
+.students form,
+.contact-page form {
+  margin-top: 2em;
+}
+.instruments form .main-label,
+.handbook form .main-label,
+.students form .main-label,
+.contact-page form .main-label {
+  display: block;
+}
+.instruments form input,
+.handbook form input,
+.students form input,
+.contact-page form input {
+  border: none;
+  border-radius: 3px;
+  color: #323232;
+  font-size: 1.2em;
+  padding: .3em;
+}
+.instruments form input[type="submit"],
+.handbook form input[type="submit"],
+.students form input[type="submit"],
+.contact-page form input[type="submit"] {
+  background-color: #323232;
+  color: #fafafa;
+  transition: all 0.3s ease;
+}
+.instruments form input[type="submit"]:hover,
+.handbook form input[type="submit"]:hover,
+.students form input[type="submit"]:hover,
+.contact-page form input[type="submit"]:hover {
+  background-color: #fafafa;
+  color: #323232;
+}
+.instruments form textarea,
+.handbook form textarea,
+.students form textarea,
+.contact-page form textarea {
+  width: 300px;
+}
+.instruments form .input-container .input-with-sub,
+.handbook form .input-container .input-with-sub,
+.students form .input-container .input-with-sub,
+.contact-page form .input-container .input-with-sub {
+  display: inline-block;
+  margin-right: 1em;
+  padding-bottom: 2em;
+  position: relative;
+}
+.instruments form .input-container .sub-label,
+.handbook form .input-container .sub-label,
+.students form .input-container .sub-label,
+.contact-page form .input-container .sub-label {
+  position: absolute;
+  bottom: 0;
+  font-weight: 100;
+  left: 0;
+}
+.instruments .card,
+.handbook .card,
+.students .card,
+.contact-page .card {
+  background-color: #ffcb15;
+  color: #f2b701;
+  height: 14.28571429vh;
+  margin-left: 25%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+  width: 50%;
+}
+.instruments .card:hover,
+.handbook .card:hover,
+.students .card:hover,
+.contact-page .card:hover,
+.instruments .card:active,
+.handbook .card:active,
+.students .card:active,
+.contact-page .card:active {
+  background-color: #fafafa;
+  color: #f2b701;
+}
+.instruments .card:hover .card-right,
+.handbook .card:hover .card-right,
+.students .card:hover .card-right,
+.contact-page .card:hover .card-right,
+.instruments .card:active .card-right,
+.handbook .card:active .card-right,
+.students .card:active .card-right,
+.contact-page .card:active .card-right {
+  color: #f2b701;
+}
+.instruments .card h3,
+.handbook .card h3,
+.students .card h3,
+.contact-page .card h3 {
+  font-size: 2.2em;
+  font-weight: 300;
+  height: 100%;
+}
+.instruments .card .card-left,
+.handbook .card .card-left,
+.students .card .card-left,
+.contact-page .card .card-left,
+.instruments .card .card-right,
+.handbook .card .card-right,
+.students .card .card-right,
+.contact-page .card .card-right {
+  display: inline-block;
+  height: 100%;
+  line-height: 14.28571429vh;
+  margin: 0;
+}
+.instruments .card .card-left,
+.handbook .card .card-left,
+.students .card .card-left,
+.contact-page .card .card-left {
+  padding-right: .5em;
+  text-align: right;
+  width: 40%;
+}
+.instruments .card .card-right,
+.handbook .card .card-right,
+.students .card .card-right,
+.contact-page .card .card-right {
+  color: #ffcb15;
+  text-align: left;
+  width: 60%;
+}
+.instruments h2,
+.handbook h2,
+.students h2,
+.contact-page h2,
+.instruments h1,
+.handbook h1,
+.students h1,
+.contact-page h1 {
+  color: white;
+  font-size: 4em;
+  font-weight: 300;
+}
+.instruments .students-apps-header,
+.handbook .students-apps-header,
+.students .students-apps-header,
+.contact-page .students-apps-header {
+  font-size: 3em;
+}
+.instruments .students-apps,
+.handbook .students-apps,
+.students .students-apps,
+.contact-page .students-apps {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+}
+.instruments ul > li,
+.handbook ul > li,
+.students ul > li,
+.contact-page ul > li {
+  margin-bottom: 1em;
+}
+.instruments li ul li,
+.handbook li ul li,
+.students li ul li,
+.contact-page li ul li {
+  color: #fafafa;
+  display: inline-block;
+  font-size: .9em;
+  list-style: circle;
+  margin-right: 5%;
+  vertical-align: top;
+  width: 45%;
+}
+.home {
+  background-color: #fafafa;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  bottom: 0;
+  font-size: 1.5em;
+  height: 21.42857143vh;
+  position: fixed;
+  right: 5%;
+  text-align: center;
+  transition: all .3s ease;
+  width: 15%;
+}
+.home a {
+  height: 100%;
+  transition: all .3s ease;
+  width: 100%;
+}
+.home .home-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+.home:hover {
+  background-color: #323232;
+  cursor: pointer;
+}
+.home:hover a {
+  color: #fafafa;
+}
+.blog-posts {
+  margin-top: 3em;
+}
+.about {
+  margin-top: 3em;
+}
+.about img {
+  border-radius: 5px;
+  margin: 1.5em 0;
+}
+.about p {
+  border-bottom: 1px solid #fafafa;
+  border-left: 1px solid #fafafa;
+  margin: auto;
+  padding: 1em;
+  text-align: left;
+  width: 80%;
 }

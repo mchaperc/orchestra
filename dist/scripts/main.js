@@ -42,11 +42,18 @@ require.config({
 });
 
 require(['templates', 'main']);
-var app = window.app || {};
-
 require(['marionette', 'backbone', 'dust', 'templates', 'router'], 
 	function(Marionette, Backbone, dust, templates, router) {	
-	app = new Marionette.Application();
+	var App = Marionette.Application.extend({
+		initialize: function() {
+			this.router = new router(this);
+		},
+		regions: {
+			'main': '.app'
+		}
+	});
+
+	var app = new App();
 
 	app.on('start', function() {
 		if (Backbone.history) {
@@ -2163,12 +2170,38 @@ var requirejs, require, define;
     //Set up with config info.
     req(cfg);
 }(this));
-define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main', 'views/welcome-view-nav', 'collections/nav', 'models/welcome'], 
-	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, NavColl, WelcomeText) {
-		app.router = Marionette.AppRouter.extend({
+define(['marionette', 
+		'backbone', 
+		'views/welcome-view', 
+		'views/welcome-view-main', 
+		'views/welcome-view-nav', 
+		'views/info-nav',
+		'views/main-content-layout',
+		'views/info-view-instruments',
+		'collections/nav', 
+		'models/welcome', 
+		'models/info', 
+		'models/instruments',
+		'models/handbook',
+		'models/resources',
+		'models/contact',
+		'models/7&8',
+		'models/six',
+		'models/five',
+		'models/four'
+		], 
+	function(Marionette, Backbone, WelcomeView, WelcomeMainView, NavView, InfoNav, MainContentView, InstrumentView, NavColl, WelcomeText, Info, Instruments, Handbook, Resources, Contact, SevenEight, Six, Five, Four) {
+		return router = Marionette.AppRouter.extend({
 			routes: {
 				'': 'index',
 				'info': 'info',
+				'info/instruments': 'instruments',
+				'info/handbook': 'handbook',
+				'info/calendar': 'calendar',
+				'info/stores': 'stores',
+				'info/donors': 'donors',
+				'info/edmodo': 'edmodo',
+				'info/remind': 'remind',
 				'resources': 'resources',
 				'contact': 'contact',
 				'7&8': 'sevenEight',
@@ -2176,101 +2209,145 @@ define(['marionette', 'backbone', 'views/welcome-view', 'views/welcome-view-main
 				'5': 'five',
 				'4': 'four'
 			},
-			index: function() {
-				var stuff = new Backbone.Model({text: 'Some text', nav: 'a few links could go here'});
-				var nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
+
+			initialize: function(app) {
+				this.nav = new Backbone.Collection(_.each(NavColl.nav, function(item) {
 					return item;
 				}));
-				var welcome = new Backbone.Model(WelcomeText);
-				var welcomeView = new WelcomeView({model: nav});
-				if ($('.app').html()) {
-					$('.main-container').animate({'right': '0%'}, 500)
+				this.app = app;
+				this.welcome = new Backbone.Model(WelcomeText);
+				this.info = new Backbone.Model(Info);
+				this.welcomeView = new WelcomeView({model: this.nav});
+			},
+
+			index: function() {
+				if (this.app.getRegion('main').hasView()) {
+					$('.main-container').animate({'right': '0%'}, 500);
 				} else {
-					$('.app').append(welcomeView.render().el);
-					welcomeView.showChildView('main', new WelcomeMainView({model: welcome}));
-					welcomeView.showChildView('nav', new NavView({collection: nav, router: this}));
+					this.app.getRegion('main').show(this.welcomeView);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));
+				}
+				if ($('.welcome-content:hidden')) {
+					$('iframe').remove();
+					$('.welcome-content').show();
 				}
 			},
 			info: function() {
-				console.log('info');
-				$('.app').css({'background-color': '#F2B701'});
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var contentView = new MainContentView({model: this.info, router: this, key: 'Info'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			instruments: function() {
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var instruments = new Backbone.Model({Instruments});
+				var contentView = new MainContentView({model: instruments, router: this, key: 'Instruments'});
+				this.welcomeView.showChildView('mainContent', contentView);
+				this.cleanUpInfo();
+			},
+			handbook: function() {
+				this.checkContent();
+				$('.app').attr('class', 'app info');
+				var handbook = new Backbone.Model({Handbook});
+				var contentView = new MainContentView({model: handbook, router: this, key: 'Handbook'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			calendar: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			stores: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			donors: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			edmodo: function() {
+				this.checkContent();
+				this.cleanUpInfo();
+			},
+			remind: function() {
+				this.checkContent();
+				this.cleanUpInfo();
 			},
 			resources: function() {
-				$('.app').css({'background-color': '#E57D04'});
+				this.checkContent();
+				$('.app').attr('class', 'app resources');
+				var resources = new Backbone.Model({Resources});
+				var contentView = new MainContentView({model: resources, router: this, key: 'Resources'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			contact: function() {
-				$('.app').css({'background-color': '#DC0030'});
+				this.checkContent();
+				$('.app').attr('class', 'app contact');
+				var contact = new Backbone.Model({Contact});
+				var contentView = new MainContentView({model: contact, router: this, key: 'Contact'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			sevenEight: function() {
-				$('.app').css({'background-color': '#B10058'});
+				this.checkContent();
+				$('.app').attr('class', 'app sevenEight');
+				var sevenEight = new Backbone.Model({SevenEight});
+				var contentView = new MainContentView({model: sevenEight, router: this, key: 'SevenEight'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			six: function() {
-				$('.app').css({'background-color': '#7C378A'});
+				this.checkContent();
+				$('.app').attr('class', 'app six');
+				var six = new Backbone.Model({Six});
+				var contentView = new MainContentView({model: six, router: this, key: 'Six'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			five: function() {
-				$('.app').css({'background-color': '#09A275'});
+				this.checkContent();
+				$('.app').attr('class', 'app five');
+				var five = new Backbone.Model({Five});
+				var contentView = new MainContentView({model: five, router: this, key: 'Five'});
+				this.welcomeView.showChildView('mainContent', contentView);
 			},
 			four: function() {
-				$('.app').css({'background-color': '#7CB854'});
+				this.checkContent();
+				$('.app').attr('class', 'app four');
+				var four = new Backbone.Model({Four});
+				var contentView = new MainContentView({model: four, router: this, key: 'Four'});
+				this.welcomeView.showChildView('mainContent', contentView);
+			},
+			cleanUpInfo: function() {
+				if ($('.parent-info-text')) {
+					$('.parent-info-text').remove();
+				}
+				$('.parent-info-links li').each(function(index, value) {
+					if ($(value).hasClass('selected')) {
+						$(value).removeClass('selected');
+					}
+				})
+				$('a[href="'+ '#' + Backbone.history.getFragment() + '"] li').addClass('selected');
+			},
+			checkContent: function() {
+				if (!this.app.getRegion('main').hasView()) {
+					this.app.getRegion('main').show(this.welcomeView);
+					this.welcomeView.showChildView('main', new WelcomeMainView({model: this.welcome}));
+					this.welcomeView.showChildView('nav', new NavView({collection: this.nav, router: this}));	
+				}
+				if ($('.main-container').css('position') !== 'absolute') {
+					$('.main-container').animate({'position': 'absolute', 'right': '94.5%'}, 500);
+				}
 			}
 		});
-		var router = new app.router();
-		return router;
 	});
 define(function() {
 	return {
+
+			template: false,
 			nav: [
 				{
 					text: 'Parent Information',
 					link: '/info',
 					icon: 'info-circle',
-					sublinks: [
-						{
-							text: 'Explore the Website',
-							link: '/info/explore',
-							icon: 'compass'
-						},
-						{
-							text: 'Instruments',
-							link: '/info/explore',
-							icon: 'blacktie'
-						},
-						{
-							text: 'Orchestra Handbook',
-							link: '/info/handbook',
-							icon: 'map'
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						},
-						{
-							text: '',
-							link: '',
-							icon: ''
-						}
-					]
 				},
 				{
 					text: 'Student Resources',
@@ -2289,32 +2366,540 @@ define(function() {
 				},
 				{
 					text: '6th Grade',
-					link: '6',
+					link: '/6',
 					icon: 'smile-o'
 				},
 				{
 					text: '5th Grade',
-					link: '5',
+					link: '/5',
 					icon: 'gamepad'
 				},
 				{
 					text: '4th Grade',
-					link: '4',
+					link: '/4',
 					icon: 'optin-monster'
 				}
 		]}
 })
 define(function() {
 	return {
+		template: '7&8-view.dust',
+		className: 'sevenEight',
+		routeClass: 'home-sevenEight',
+		about: {
+			title: 'About Mrs. C',
+			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
+			posts: [
+				{
+					title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
+					date: '8/27/2015',
+					content: {
+						text: '',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
+					}
+				},
+				{
+					title: 'Start the Year with a BANG!',
+					date: '8/15/2015',
+					content: {
+						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+					}
+				}
+			]
+		}
+	}
+})
+define(function() {
+	return {
+		template: 'contact-view.dust',
+		className: 'contact',
+		routeClass: 'home-contact',
+		title: 'Do you have any questions or concerns?',
+		titleSubText: 'Please fill out the contact form below and I\'ll get in touch with you as soon as possible. You may also email me or call any of the schools that I have listed below. Thank you!',
+		form: [
+			{
+				infoType: 'Parent Name',
+				inputs: [
+					{
+						required: true,
+						type: 'text',
+						label: 'First'
+					},
+					{
+						required: true,
+						type: 'text',
+						label: 'Last'
+					}
+				]	
+			},
+			{
+				infoType: 'Student Name',
+				inputs: [
+					{
+						required: true,
+						type: 'text',
+						label: 'First'	
+					},
+					{
+						required: true,
+						type: 'text',
+						label: 'Last'
+					}
+				]
+			},
+			{
+				infoType: 'Phone Number',
+				inputs: [
+					{
+						required: true,
+						type: 'tel'
+					}
+				]
+			},
+			{
+				infoType: 'Email',
+				inputs: [
+					{
+						required: false,
+						type: 'email'
+					}
+				]
+			},
+			{
+				infoType: 'Comment',
+				textarea: [
+					{
+						required: true,
+						type: 'textarea'
+					}
+				]
+			},
+			{
+				infoType: '',
+				inputs: [
+					{
+						action: 'mailto:mchaperc@yahoo.com',
+						type: 'submit'
+					}
+				]
+			},
+		],
+		footer: {
+			heading: 'Contact Mrs. C',
+			email: 'ejchastain@union.k12.sc.us',
+			numbers: [
+				{
+					num: '(864) 429-175,  ext. 46 (Orchestra Office)'
+				},
+				{
+					num: '(864) 674-5518 (Jonesville Elementary/Middle)'
+				},
+				{
+					num: '(864) 429-1737 (Foster Park Elementary)'
+				},
+				{
+					num: '(864) 545-6501 (Lockhart Middle/Elementary)'
+				}
+			]
+		}
+	}
+}) 
+define(function() {
+	return {
+		template: 'five-view.dust',
+		className: 'five',
+		routeClass: 'home-five',
+		about: {
+			title: 'About Mrs. C',
+			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
+			posts: [
+				{
+					postTitle: 'Need Some Review On Positioning or Your Open Strings?',
+					date: '8/27/2015',
+					content: [
+						{
+							contentTitle: 'How To Find Great Cello Positioning',
+							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/D58DRwwQGo0" frameborder="0" allowfullscreen></iframe>'
+						},
+						{
+							contentTitle: 'How To Get To "Play" Position for Violins & Violas',
+							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/PFFL2Hezs9M" frameborder="0" allowfullscreen></iframe>'
+						},
+						{
+							contentTitle: '"Ants Song" for Violins & Basses',
+							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/O5_uZCmEHuM" frameborder="0" allowfullscreen></iframe>'
+						},
+						{
+							contentTitle: '"Ants Song" for Violas Cellos',
+							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/wXvia6pYU8c" frameborder="0" allowfullscreen></iframe>'
+						}
+					]
+				},
+				{
+					postTitle: 'Start the Year with a BANG!',
+					date: '8/15/2015',
+					content: {
+						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+					}
+				}
+			]
+		}
+	}
+})
+define(function() {
+	return {
+		template: 'four-view.dust',
+		className: 'four',
+		routeClass: 'home-four',
+		about: {
+			title: 'About Mrs. C',
+			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
+			posts: [
+				{
+					title: 'Start the Year with a BANG!',
+					date: '8/15/2015',
+					content: [
+						'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+						'<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+					]	
+				}
+			]
+		}
+	}
+})
+define(function() {
+	return {
+		routeClass: 'home-info',
+		parentLinks: [
+			{
+				link: '#info/instruments',
+				text: 'Instruments'
+			},
+			{
+				link: '#info/handbook',
+				text: 'Orchestra Handbook'
+			},
+			{
+				link: '#info/calendar',
+				text: '2015-2016 Calendar'
+			},
+			{
+				link: '#info/stores',
+				text: 'Music Stores'
+			},
+			{
+				link: '#info/donors',
+				text: 'Donors Choose'
+			},
+			{
+				link: '#info/edmodo',
+				text: 'Edmodo'
+			},
+			{
+				link: '#info/remind',
+				text: 'Remind'
+			}
+		],
+		template: 'info-view-handbook.dust',
+		className: 'handbook',
+		title: 'Orchestra Handbook',
+		titleSubText: 'The Orchestra Handbook has all the information that you need for the 2015-2016 school year in regards to your Orchestra class, including concert information, important dates, and grading policies. Parents/Guardians, please note that the last page of the Handbook (Handbook Contract) must be signed by you and your child and returned to Mrs. Chastain for your child to continue in Orchestra class.',
+		additionalText: {
+			heading: 'Have you misplaced your 2015-2016 Orchestra Handbook?',
+			prompts: [
+				{
+					text: '<a href="https://www.dropbox.com/s/ot4j0no6fa93c7m/ES%20Handbook%201.pdf?dl=0">Click here</a> to view and print the 2015 Elementary School Handbook (5th grade).'
+				},
+				{
+					text: '<a href="https://www.dropbox.com/s/1a32b3zwby252iz/MS%20Handbook.pdf?dl=0">Click here</a> to view and print the 2015 Middle School Handbook (6th-8th grades).'
+				}
+			]
+		}
+	}
+})
+define(function() {
+	return {
+		routeClass: 'home-info',
+		template: 'info-view.dust',
+		className: 'info-nav',
+		parentLinks: [
+			{
+				link: '#info/instruments',
+				text: 'Instruments'
+			},
+			{
+				link: '#info/handbook',
+				text: 'Orchestra Handbook'
+			},
+			{
+				link: '#info/calendar',
+				text: '2015-2016 Calendar'
+			},
+			{
+				link: '#info/stores',
+				text: 'Music Stores'
+			},
+			{
+				link: '#info/donors',
+				text: 'Donors Choose'
+			},
+			{
+				link: '#info/edmodo',
+				text: 'Edmodo'
+			},
+			{
+				link: '#info/remind',
+				text: 'Remind'
+			}
+		]
+	}
+})
+define(function() {
+	return {
+		routeClass: 'home-info',
+		template: 'info-view-instruments.dust',
+		className: 'instruments',
+		parentLinks: [
+			{
+				link: '#info/instruments',
+				text: 'Instruments'
+			},
+			{
+				link: '#info/handbook',
+				text: 'Orchestra Handbook'
+			},
+			{
+				link: '#info/calendar',
+				text: '2015-2016 Calendar'
+			},
+			{
+				link: '#info/stores',
+				text: 'Music Stores'
+			},
+			{
+				link: '#info/donors',
+				text: 'Donors Choose'
+			},
+			{
+				link: '#info/edmodo',
+				text: 'Edmodo'
+			},
+			{
+				link: '#info/remind',
+				text: 'Remind'
+			}
+		],
+		title: 'Instruments',
+		titleSubText: 'You have several options when obtaining an instrument for your child: renting from the school, renting from a company, or purchasing an instrument to own. Please continue reading below for more information on each option.',
+		content: [
+			{
+				subTitle1: 'How do I...',
+				subTitle2: 'rent an instrument?',
+				bullets: [
+					{
+						text: 'You can rent an instrument from your school or from another company. Renting an instrument from your school costs $50 for the year for 5th Graders, and $75 for the year for Grades 6-12 no matter what instrument you choose! Many students who play large instruments (cello and bass) rent one instrument to keep at home and another to keep at school, in order to prevent damages carrying the instrument back and forth to school. (Please note, some rent two instruments so that students don\'t run into issues with instruments on buses- we have had situations where large instruments are not allowed on the buses because there is no room.) Renting from the school is a cheaper and safer option, as you are only responsible for up to $225.00 in damages when renting with the school. In order for your child to receive a school instrument, you must return an Instrument Rental Agreement  (given to your child on the first day of school, also available for download below) that is signed by a parent/guardian and filled out completely to get an instrument from the school. These instruments are first come, first serve.'
+					},
+					{
+						text: 'If you want to rent from a music company, we highly recommend Music and Arts. If you are interested in renting from Music and Arts, please come to our Instrument Rental Night on August 26 from 6-8 pm at Sims Middle School and meet with a Music and Arts representative. The cost to rent a violin from Music & Arts could be $234 for the year, and larger instruments are more expensive.  When renting from a company, you are responsible for any and all damages.'
+					}
+				],
+			},
+			{
+				subTitle1: 'Should I...',
+				subTitle2: 'buy an instrument?',
+				bullets: [
+					{
+						text: 'SCAM ALERT! We recommend that you purchase an instrument with the help of your teachers. There are many scam artists on the Internet that are more than happy to sell you an instrument, and some may look really cool! (Cool colors or designs) But these usually turn out to be violin-shaped objects... Not real instruments. Your teacher can help you determine if the instrument you want to buy is a quality instrument.'
+
+					},
+					{
+						text: 'Why does it matter? If you purchase a scam instrument, you can pay MUCH more than the instrument is worth (and what you paid for it) just to get it to work!'
+					},
+					{
+						text: 'Below is a document to help you decide if the instrument is just a violin-shaped object or a real instrument. However, please contact your teacher if you are interested in purchasing an instrument- they know lots about instruments and can help you find the perfect instrument for your budget!'
+					}
+				]
+			}
+		]	
+	}
+})
+define(function() {
+	return {
+		template: 'resources-view.dust',
+		className: 'resources',
+		routeClass: 'home-resources',
+		title: 'Check out these music resources!',
+		resources: [
+			{
+				text: '<a href="https://www.youtube.com/channel/UC09rf4w7WYeRazpNPKdVZWA">Click here</a> to visit Mrs. Chastain\'s YouTube channel, with instructional videos and extra help on topics we work on in class.'
+			},
+			{
+				text: 'Visit this <a href="http://www.musictheory.net/exercises">Music Theory</a> site for trainers to get better at reading notes, identifying key signatures, and learning new concepts! (Click the "Note Trainer" for note-reading drills. Click "Customize" at the top right of the screen to choose a different clef or a different range of notes!)'
+			},
+			{
+				text: '<a href="http://www.metronomeonline.org/">Online Metronome</a>: Don\'t have a metronome at home? No trouble, just visit this website for an online metronome!'
+			},
+			{
+				text: '<a href="http://www.sfskids.org/">San Francisco Symphony Orchestra KIDS</a>: Music, fun, games, exploring... What\'s not to love?'
+			},
+			{
+				text: '<a href="http://www.dsokids.com/">DSO Kids</a>: The Dallas Symphony Orchestra website, filled with games, activities, composers- their biographies and their music!'
+			},
+			{
+				text: '<a href="https://www.edmodo.com/">Edmodo</a>: Link up with your class! Complete assignments, quizzes, polls, and get in touch with Mrs. Chastain... It\'s like Facebook for school!'
+			}
+		],
+		games: [
+			{
+				gameText: '<a href="http://www.musicracer.com/">Musicracer.com</a>'
+			},
+			{
+				gameText: '<a href="http://artsedge.kennedy-center.org/interactives/steprightup/whackanote/whackanote.html">Whack-A-Note</a>'
+			},
+			{
+				gameText: '<a href="http://artsedge.kennedy-center.org/multimedia/Interactives/quack-and-whack/quackin-rhythms">Quackin\' Rhythms</a>'
+			}
+		],
+		apps: [
+			{
+				text: 'Edmodo'
+			},
+			{
+				text: 'MelodyMelody matching game'
+			},
+			{
+				text: 'NoteWorks (Munchie Game)'
+			},
+			{
+				text: 'The Orchestra App'
+			},
+			{
+				text: 'Musictheory App'
+			},
+			{
+				text: 'ClearTune tuner'
+			},
+			{
+				text: 'ProMetronome'
+			},
+			{
+				text: 'GarageBand'
+			},
+			{
+				text: 'Read Music'
+			},
+			{
+				text: 'SpeakBeat Metronome'
+			},
+			{
+				text: 'Zondle'
+			}
+		]
+	}
+})
+define(function() {
+	return {
+		template: 'six-view.dust',
+		className: 'six',
+		routeClass: 'home-six',
+		about: {
+			title: 'About Mrs. C',
+			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
+			posts: [
+				{
+					title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
+					date: '8/27/2015',
+					content: {
+						text: '',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
+					}
+				},
+				{
+					title: 'Start the Year with a BANG!',
+					date: '8/15/2015',
+					content: {
+						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+					}
+				}
+			]
+		}
+	}
+})
+define(function() {
+	return {
+			title: 'Mrs. C\'s Orchestra',
 			main: 'Welcome Back!',
 			sublink: 'Click below to watch an important video about this website!',
 			buttonText: 'Watch Now!',
-			subText: 'Welcome! This year, we are participating in regular classroom structure and also exploring "blended learning." This means we will be using tablets and phones in class to watch videos and answer questions, create, explore student-led learning, and engage in lots of fun! To find out more about blended learning, you can click <a href="">here</a> to visit the Khan Academy for in-depth information - or, you can <a href="">contact Mrs. C</a> if you have any questions.'
+			subText: 'Welcome! This year, we are participating in regular classroom structure and also exploring "blended learning." This means we will be using tablets and phones in class to watch videos and answer questions, create, explore student-led learning, and engage in lots of fun! To find out more about blended learning, you can click <a href="https://www.khanacademy.org/partner-content/ssf-cci/sscc-intro-blended-learning">here</a> to visit the Khan Academy for in-depth information - or, you can <a href="/#contact">contact Mrs. C</a> if you have any questions.'
 		}
 	});
+define(['backbone', 'marionette', 'templates'], 
+	function(Backbone, Marionette, templates) {
+		return infoView = Marionette.ItemView.extend({
+			template: 'info-view.dust',
+			tagName: 'section',
+			className: 'content info-container',
+			events: {
+			},
+			initialize: function() {
+				console.log('hello');
+			},
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'templates'
+		], 
+	function(Backbone, Marionette, templates) {
+		return InfoViewInstruments = Marionette.ItemView.extend({
+			template: 'info-view-instruments.dust',
+			className: 'instruments',
+			tagName: 'section',
+			events: {
+
+			}
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'backbone.marionette.dust', 
+		'templates'
+], 
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return MainContentLayout = Marionette.LayoutView.extend({
+			regions: {
+				contentContainer: '.contentContainer'
+			},
+			events: {
+				'click .home': 'goHome'
+			},
+			initialize: function(options) {
+				this.router = options.router;
+				this.key = options.key;
+				this.template = this.model.get(this.key).template;
+				this.className = this.model.get(this.key).className;
+				var homeClass = Backbone.history.getFragment().split('/');
+			},
+			onRender: function() {
+			},
+			goHome: function(e) {
+				e.preventDefault();
+				$('.main-container').animate({'right': '0%'}, 200);
+				this.router.navigate('/', true);
+			}
+		})
+	})
 define(['marionette', 'backbone'],
 	function(Marionette, Backbone) {
-		return app.WelcomeViewMain = Marionette.ItemView.extend({
+		return WelcomeViewMain = Marionette.ItemView.extend({
 			template: 'welcome-view-main.dust',
 			className: 'welcome-content col-md-11',
 			events: {
@@ -2325,16 +2910,14 @@ define(['marionette', 'backbone'],
 			},
 			showVideo: function(e) {
 				e.preventDefault();
-
-				$('.welcome-text').html('');
+				$('.welcome-content').hide();
 				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
-
 			}
 		})
 	})
 define(['marionette', 'backbone'], 
 	function(Marionette, Backbone) {
-		return app.navItemView = Marionette.ItemView.extend({
+		return navItemView = Marionette.ItemView.extend({
 			template: 'welcome-view-nav-item.dust',
 			className: 'nav-item',
 			tagName: 'li'
@@ -2343,7 +2926,7 @@ define(['marionette', 'backbone'],
 define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
 	function(Marionette, Backbone, NavItemView) {
 		var navItem = NavItemView;
-		return app.NavView = Marionette.CollectionView.extend({
+		return NavView = Marionette.CollectionView.extend({
 			template: 'welcome-view-nav.dust',
 			className: 'welcome-view-nav',
 			tagName: 'ul',
@@ -2356,34 +2939,27 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 			},
 			showContent: function(e) {
 				e.preventDefault();
-				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500)
+				$('.main-container').animate({'position': 'absolute','right': '94.5%'}, 500);
 				this.router.navigate($(e.currentTarget).attr('href'), true);
 			}
 		})
 	})
 define([
-	'underscore',
 	'backbone', 
 	'marionette', 
 	'backbone.marionette.dust',
 	'templates'
 ], 
-	function(_, Backbone, Marionette, dustMarionette, templates) {
-		return app.WelcomeView = Marionette.LayoutView.extend({
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return WelcomeView = Marionette.LayoutView.extend({
 			template: 'welcome-page.dust',
 			className: 'main-container',
 
 			regions: {
 				main: '.welcome-text',
-				nav: '.welcome-nav'
-			},
-
-			initialize: function() {
-				var NavView = Marionette.CollectionView.extend(this.collection);
-			},
-			onRender: function() {
-				
-			},
+				nav: '.welcome-nav',
+				mainContent: '.main-content'
+			}
 
 		});
 });
