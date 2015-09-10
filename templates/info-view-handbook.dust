@@ -1,11 +1,4 @@
-<nav class="navbar">
-	<ul class="parent-info-links col-sm-10">
-		{#parentLinks}
-			<a href="{link}"><li class="parent-info-links-link"><p>{text}</p></li></a>
-		{/parentLinks}
-	</ul>
-</nav>
-
+{>"nav.dust"/}
 <section class="handbook col-sm-9">
 	<h2 class="page-header">{title}</h2>
 	<p>{titleSubText}</p>
@@ -17,12 +10,4 @@
 		</ul>	
 	{/additionalText}
 </section>
-
-<div class="home">
-	<a href="/" class="{routeClass}">
-		<div class="home-container">
-			<p>Return Home</p>
-			<i class="fa fa-home fa-3x"></i>
-		</div>
-	</a>
-</div>
+{>"home.dust"/}

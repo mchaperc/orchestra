@@ -1,0 +1,5 @@
+<div class="about col-sm-5 col-sm-offset-1">
+	<h2 class="blog-about-heading">{title}</h2>
+	<img src="{img}" alt="" class="blog-about-img">
+	<p class="blog-about-text">{aboutText}</p>
+</div>

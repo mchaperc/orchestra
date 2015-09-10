@@ -20,12 +20,4 @@
 		{/form}
 	</form>
 </section>
-
-<div class="home">
-	<a href="/" class="{routeClass}">
-		<div class="home-container">
-			<p>Return Home</p>
-			<i class="fa fa-home fa-3x"></i>
-		</div>
-	</a>
-</div>
+{>"home.dust"/}

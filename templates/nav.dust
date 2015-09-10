@@ -1,0 +1,7 @@
+<nav class="navbar">
+	<ul class="parent-info-links col-sm-10">
+		{#parentLinks}
+			<a href="{link}"><li class="parent-info-links-link"><p>{text}</p></li></a>
+		{/parentLinks}
+	</ul>
+</nav>

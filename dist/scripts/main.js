@@ -2385,130 +2385,6 @@ define(function() {
 				}
 		]}
 })
-define(['backbone', 'marionette', 'templates'], 
-	function(Backbone, Marionette, templates) {
-		return infoView = Marionette.ItemView.extend({
-			template: 'info-view.dust',
-			tagName: 'section',
-			className: 'content info-container',
-			events: {
-			},
-			initialize: function() {
-				console.log('hello');
-			},
-		})
-	})
-define(['backbone', 
-		'marionette', 
-		'templates'
-		], 
-	function(Backbone, Marionette, templates) {
-		return InfoViewInstruments = Marionette.ItemView.extend({
-			template: 'info-view-instruments.dust',
-			className: 'instruments',
-			tagName: 'section',
-			events: {
-
-			}
-		})
-	})
-define(['backbone', 
-		'marionette', 
-		'backbone.marionette.dust', 
-		'templates'
-], 
-	function(Backbone, Marionette, dustMarionette, templates) {
-		return MainContentLayout = Marionette.LayoutView.extend({
-			regions: {
-				contentContainer: '.contentContainer'
-			},
-			events: {
-				'click .home': 'goHome'
-			},
-			initialize: function(options) {
-				this.router = options.router;
-				this.key = options.key;
-				this.template = this.model.get('template');
-				this.className = this.model.get('className');
-				var homeClass = Backbone.history.getFragment().split('/');
-			},
-			onRender: function() {
-			},
-			goHome: function(e) {
-				e.preventDefault();
-				$('.main-container').removeClass('shift-left');
-				$('.main-container').addClass('shift-right');
-				this.router.navigate('/', true);
-			}
-		})
-	})
-define(['marionette', 'backbone'],
-	function(Marionette, Backbone) {
-		return WelcomeViewMain = Marionette.ItemView.extend({
-			template: 'welcome-view-main.dust',
-			className: 'welcome-content col-md-11',
-			events: {
-				'click .welcome-video-button': 'showVideo'
-			},
-			initialize: function() {
-				
-			},
-			showVideo: function(e) {
-				e.preventDefault();
-				$('.welcome-content').hide();
-				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
-			}
-		})
-	})
-define(['marionette', 'backbone'], 
-	function(Marionette, Backbone) {
-		return navItemView = Marionette.ItemView.extend({
-			template: 'welcome-view-nav-item.dust',
-			className: 'nav-item',
-			tagName: 'li'
-		})
-	})
-define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
-	function(Marionette, Backbone, NavItemView) {
-		var navItem = NavItemView;
-		return NavView = Marionette.CollectionView.extend({
-			template: 'welcome-view-nav.dust',
-			className: 'welcome-view-nav',
-			tagName: 'ul',
-			childView: navItem,
-			events: {
-				'click .nav-item > a': 'showContent'
-			},
-			initialize: function(options) {
-				this.router = options.router
-			},
-			showContent: function(e) {
-				e.preventDefault();
-				$('.main-container').removeClass('shift-right');
-				$('.main-container').addClass('shift-left');
-				this.router.navigate($(e.currentTarget).attr('href'), true);
-			}
-		})
-	})
-define([
-	'backbone', 
-	'marionette', 
-	'backbone.marionette.dust',
-	'templates'
-], 
-	function(Backbone, Marionette, dustMarionette, templates) {
-		return WelcomeView = Marionette.LayoutView.extend({
-			template: 'welcome-page.dust',
-			className: 'main-container',
-
-			regions: {
-				main: '.welcome-text',
-				nav: '.welcome-nav',
-				mainContent: '.main-content'
-			}
-
-		});
-});
 define(function() {
 	return {
 		template: '7&8-view.dust',
@@ -2517,26 +2393,26 @@ define(function() {
 		about: {
 			title: 'About Mrs. C',
 			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
-			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
-			posts: [
-				{
-					title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
-					date: '8/27/2015',
-					content: {
-						text: '',
-						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
-					}
-				},
-				{
-					title: 'Start the Year with a BANG!',
-					date: '8/15/2015',
-					content: {
-						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
-						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
-					}
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.'
+		},
+		posts: [
+			{
+				title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
+				date: '8/27/2015',
+				content: {
+					text: '',
+					video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
 				}
-			]
-		}
+			},
+			{
+				title: 'Start the Year with a BANG!',
+				date: '8/15/2015',
+				content: {
+					text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+					video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+				}
+			}
+		]
 	}
 })
 define(function() {
@@ -2642,40 +2518,40 @@ define(function() {
 		about: {
 			title: 'About Mrs. C',
 			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
-			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
-			posts: [
-				{
-					postTitle: 'Need Some Review On Positioning or Your Open Strings?',
-					date: '8/27/2015',
-					content: [
-						{
-							contentTitle: 'How To Find Great Cello Positioning',
-							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/D58DRwwQGo0" frameborder="0" allowfullscreen></iframe>'
-						},
-						{
-							contentTitle: 'How To Get To "Play" Position for Violins & Violas',
-							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/PFFL2Hezs9M" frameborder="0" allowfullscreen></iframe>'
-						},
-						{
-							contentTitle: '"Ants Song" for Violins & Basses',
-							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/O5_uZCmEHuM" frameborder="0" allowfullscreen></iframe>'
-						},
-						{
-							contentTitle: '"Ants Song" for Violas Cellos',
-							video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/wXvia6pYU8c" frameborder="0" allowfullscreen></iframe>'
-						}
-					]
-				},
-				{
-					postTitle: 'Start the Year with a BANG!',
-					date: '8/15/2015',
-					content: {
-						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
-						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.'
+		},
+		posts: [
+			{
+				title: 'Need Some Review On Positioning or Your Open Strings?',
+				date: '8/27/2015',
+				content: [
+					{
+						contentTitle: 'How To Find Great Cello Positioning',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/D58DRwwQGo0" frameborder="0" allowfullscreen></iframe>'
+					},
+					{
+						contentTitle: 'How To Get To "Play" Position for Violins & Violas',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/PFFL2Hezs9M" frameborder="0" allowfullscreen></iframe>'
+					},
+					{
+						contentTitle: '"Ants Song" for Violins & Basses',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/O5_uZCmEHuM" frameborder="0" allowfullscreen></iframe>'
+					},
+					{
+						contentTitle: '"Ants Song" for Violas Cellos',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/wXvia6pYU8c" frameborder="0" allowfullscreen></iframe>'
 					}
+				]
+			},
+			{
+				title: 'Start the Year with a BANG!',
+				date: '8/15/2015',
+				content: {
+					text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+					video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
 				}
-			]
-		}
+			}
+		]
 	}
 })
 define(function() {
@@ -2686,18 +2562,20 @@ define(function() {
 		about: {
 			title: 'About Mrs. C',
 			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
-			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
-			posts: [
-				{
-					title: 'Start the Year with a BANG!',
-					date: '8/15/2015',
-					content: [
-						'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
-						'<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
-					]	
-				}
-			]
-		}
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.'
+		},
+		posts: [
+			{
+				title: 'Start the Year with a BANG!',
+				date: '8/15/2015',
+				content: [
+					{
+						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+					}
+				]	
+			}
+		]
 	}
 })
 define(function() {
@@ -2938,26 +2816,26 @@ define(function() {
 		about: {
 			title: 'About Mrs. C',
 			img: 'http://mrschastainsorchestra.weebly.com/uploads/3/1/1/0/31108723/2456707.jpg?134',
-			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.',
-			posts: [
-				{
-					title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
-					date: '8/27/2015',
-					content: {
-						text: '',
-						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
-					}
-				},
-				{
-					title: 'Start the Year with a BANG!',
-					date: '8/15/2015',
-					content: {
-						text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
-						video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
-					}
+			aboutText: 'Mrs. C is an Orchestra/Music teacher at Jonesville Elementary/Middle, Lockhart Schools, and Foster Park Elementary. She loves coffee, sewing, all things Disney, teaching private lessons,  & hiking with her husband (Mr. Chastain) and their puppy, Coda. Mrs. C is a graduate of Converse College and the Fine Arts Center.'
+		},
+		posts: [
+			{
+				title: 'Teachers "Give You AAAALLLLLL" Of Themselves!',
+				date: '8/27/2015',
+				content: {
+					text: '',
+					video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/Qe2G6Vs1V_Q" frameborder="0" allowfullscreen></iframe>'
 				}
-			]
-		}
+			},
+			{
+				title: 'Start the Year with a BANG!',
+				date: '8/15/2015',
+				content: {
+					text: 'Because I\'m so THUNDERSTRUCK by how amazing you are- the secret word is "THUNDERSTRUCK!" Tell Mrs. C during the next class and earn something extra special. :) (By the way, I hope you\'re a LOT nicer to your bows & instruments than these guys...) This group is called "2Cellos:" Luka Sulic and Stjepan Hauser are their names. They both went to college at two of the top music schools in the world and won many international music competitions- playing classical music! They\'ve played with Elton John, appeared on TV shows like the Tonight Show, GLEE, and Ellen Degeneres Show, among others. They are just as happy playing classical music as they are playing rock music.  Click here to check out their website!',
+					video: '<iframe width="560" height="315" src="https://www.youtube.com/embed/uT3SBzmDxGk" frameborder="0" allowfullscreen></iframe>'
+				}
+			}
+		]
 	}
 })
 define(function() {
@@ -2969,4 +2847,128 @@ define(function() {
 			subText: 'Welcome! This year, we are participating in regular classroom structure and also exploring "blended learning." This means we will be using tablets and phones in class to watch videos and answer questions, create, explore student-led learning, and engage in lots of fun! To find out more about blended learning, you can click <a href="https://www.khanacademy.org/partner-content/ssf-cci/sscc-intro-blended-learning">here</a> to visit the Khan Academy for in-depth information - or, you can <a href="/#contact">contact Mrs. C</a> if you have any questions.'
 		}
 	});
+define(['backbone', 'marionette', 'templates'], 
+	function(Backbone, Marionette, templates) {
+		return infoView = Marionette.ItemView.extend({
+			template: 'info-view.dust',
+			tagName: 'section',
+			className: 'content info-container',
+			events: {
+			},
+			initialize: function() {
+				console.log('hello');
+			},
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'templates'
+		], 
+	function(Backbone, Marionette, templates) {
+		return InfoViewInstruments = Marionette.ItemView.extend({
+			template: 'info-view-instruments.dust',
+			className: 'instruments',
+			tagName: 'section',
+			events: {
+
+			}
+		})
+	})
+define(['backbone', 
+		'marionette', 
+		'backbone.marionette.dust', 
+		'templates'
+], 
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return MainContentLayout = Marionette.LayoutView.extend({
+			regions: {
+				contentContainer: '.contentContainer'
+			},
+			events: {
+				'click .home': 'goHome'
+			},
+			initialize: function(options) {
+				this.router = options.router;
+				this.key = options.key;
+				this.template = this.model.get('template');
+				this.className = this.model.get('className');
+				var homeClass = Backbone.history.getFragment().split('/');
+			},
+			onRender: function() {
+			},
+			goHome: function(e) {
+				e.preventDefault();
+				$('.main-container').removeClass('shift-left');
+				$('.main-container').addClass('shift-right');
+				this.router.navigate('/', true);
+			}
+		})
+	})
+define(['marionette', 'backbone'],
+	function(Marionette, Backbone) {
+		return WelcomeViewMain = Marionette.ItemView.extend({
+			template: 'welcome-view-main.dust',
+			className: 'welcome-content col-md-11',
+			events: {
+				'click .welcome-video-button': 'showVideo'
+			},
+			initialize: function() {
+				
+			},
+			showVideo: function(e) {
+				e.preventDefault();
+				$('.welcome-content').hide();
+				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
+			}
+		})
+	})
+define(['marionette', 'backbone'], 
+	function(Marionette, Backbone) {
+		return navItemView = Marionette.ItemView.extend({
+			template: 'welcome-view-nav-item.dust',
+			className: 'nav-item',
+			tagName: 'li'
+		})
+	})
+define(['marionette', 'backbone', 'views/welcome-view-nav-item'], 
+	function(Marionette, Backbone, NavItemView) {
+		var navItem = NavItemView;
+		return NavView = Marionette.CollectionView.extend({
+			template: 'welcome-view-nav.dust',
+			className: 'welcome-view-nav',
+			tagName: 'ul',
+			childView: navItem,
+			events: {
+				'click .nav-item > a': 'showContent'
+			},
+			initialize: function(options) {
+				this.router = options.router
+			},
+			showContent: function(e) {
+				e.preventDefault();
+				$('.main-container').removeClass('shift-right');
+				$('.main-container').addClass('shift-left');
+				this.router.navigate($(e.currentTarget).attr('href'), true);
+			}
+		})
+	})
+define([
+	'backbone', 
+	'marionette', 
+	'backbone.marionette.dust',
+	'templates'
+], 
+	function(Backbone, Marionette, dustMarionette, templates) {
+		return WelcomeView = Marionette.LayoutView.extend({
+			template: 'welcome-page.dust',
+			className: 'main-container',
+
+			regions: {
+				main: '.welcome-text',
+				nav: '.welcome-nav',
+				mainContent: '.main-content'
+			}
+
+		});
+});
 //# sourceMappingURL=main.js.map

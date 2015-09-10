@@ -383,7 +383,7 @@ body {
 .handbook .card .card-left,
 .students .card .card-left,
 .contact-page .card .card-left {
-  padding-right: .5em;
+  padding-right: 0.5em;
   text-align: right;
   width: 40%;
 }
@@ -433,7 +433,7 @@ body {
 .contact-page li ul li {
   color: #fafafa;
   display: inline-block;
-  font-size: .9em;
+  font-size: 0.9em;
   list-style: circle;
   margin-right: 5%;
   vertical-align: top;
@@ -449,14 +449,14 @@ body {
   position: fixed;
   right: 5%;
   text-align: center;
-  transition: all .3s ease;
-  -webkit-transition: all .3s ease;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
   width: 15%;
 }
 .home a {
   height: 100%;
-  transition: all .3s ease;
-  -webkit-transition: all .3s ease;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
   width: 100%;
 }
 .home .home-container {
@@ -474,7 +474,17 @@ body {
   color: #fafafa;
 }
 .blog-posts {
+  margin-left: 4em;
   margin-top: 3em;
+}
+.blog-posts p {
+  text-align: left;
+}
+.blog-posts .blog-posts-item-date {
+  text-align: right;
+}
+.blog-posts .blog-posts-item-heading {
+  font-weight: 300;
 }
 .about {
   margin-top: 3em;
@@ -489,5 +499,5 @@ body {
   margin: auto;
   padding: 1em;
   text-align: left;
-  width: 80%;
+  width: 55%;
 }
