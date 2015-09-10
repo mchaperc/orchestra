@@ -5,7 +5,11 @@
 	<form class="contact-form">
 		{#form}
 			<div class="input-container">
-				<label class="main-label">{?infoType}{infoType}:{/infoType}</label>
+				<label class="main-label">
+					{?infoType}
+						{infoType}:
+					{/infoType}
+				</label>
 				{#inputs}
 					<div class="input-with-sub">
 						<input type="{type}">
