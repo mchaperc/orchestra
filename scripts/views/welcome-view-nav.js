@@ -17,6 +17,10 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 				$('.main-container').removeClass('shift-right');
 				$('.main-container').addClass('shift-left');
 				this.router.navigate($(e.currentTarget).attr('href'), true);
+			},
+			onShow: function() {
+				window.innerWidth < 768 ? $('.welcome-nav').offset({top: $('.welcome-text').height()}) : null;
+				console.log($('.welcome-text').height());
 			}
 		})
 	})

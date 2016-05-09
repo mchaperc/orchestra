@@ -89,11 +89,16 @@ body {
   z-index: 2;
 }
 .welcome-text iframe {
-  left: 7%;
+  display: block;
+  left: 10%;
+  max-width: 80%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
+}
+.welcome-text .mobile-menu-nav {
+  display: none;
 }
 .welcome-content {
   left: 5%;
@@ -150,12 +155,22 @@ body {
   width: 100%;
   z-index: 10;
 }
-.nav-item a .nav-text {
+.nav-item a .nav-content {
+  diplay: block;
   position: absolute;
-  right: 3%;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
+  width: inherit;
+}
+.nav-item a .nav-content .nav-text {
+  display: inline-block;
+  text-align: right;
+  width: 80%;
+}
+.nav-item a .nav-content .nav-icon {
+  float: right;
+  margin-right: 3%;
 }
 .nav-item .fa {
   font-size: 1.5em;
@@ -332,10 +347,10 @@ body {
   background-color: #ffcb15;
   color: #fafafa;
   height: 14.28571429vh;
-  margin-left: 25%;
+  margin: auto;
   margin-bottom: 2em;
   margin-top: 2em;
-  width: 50%;
+  min-width: 50%;
 }
 .instruments .card:hover,
 .handbook .card:hover,
@@ -500,4 +515,27 @@ body {
   padding: 1em;
   text-align: left;
   width: 55%;
+}
+@media (max-width: 768px) {
+  .welcome-text {
+    border-radius: 0;
+    height: 100%;
+    top: 0;
+  }
+  .welcome-text .mobile-menu-nav {
+    border: 1px solid #323232;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px;
+  }
+  .welcome-nav .nav-item .nav-content {
+    width: 100%;
+  }
+  .welcome-nav .nav-item .nav-content .nav-text {
+    width: 100%;
+    text-align: center;
+  }
+  .welcome-nav .nav-item .nav-content .nav-icon {
+    display: none;
+  }
 }

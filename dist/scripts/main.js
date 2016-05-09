@@ -2910,7 +2910,8 @@ define(['marionette', 'backbone'],
 			template: 'welcome-view-main.dust',
 			className: 'welcome-content col-md-11',
 			events: {
-				'click .welcome-video-button': 'showVideo'
+				'click .welcome-video-button': 'showVideo',
+				'click .mobile-menu-nav': 'scrollToMenu'
 			},
 			initialize: function() {
 				
@@ -2919,6 +2920,10 @@ define(['marionette', 'backbone'],
 				e.preventDefault();
 				$('.welcome-content').hide();
 				$('.welcome-text').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/ctfjP3e7Qcw" frameborder="0" allowfullscreen></iframe>');
+			},
+			scrollToMenu: function() {
+				var scrollHeight = $('.welcome-text').height();
+				$('body').animate({ scrollTop: scrollHeight }, 500);
 			}
 		})
 	})
@@ -2949,6 +2954,10 @@ define(['marionette', 'backbone', 'views/welcome-view-nav-item'],
 				$('.main-container').removeClass('shift-right');
 				$('.main-container').addClass('shift-left');
 				this.router.navigate($(e.currentTarget).attr('href'), true);
+			},
+			onShow: function() {
+				window.innerWidth < 768 ? $('.welcome-nav').offset({top: $('.welcome-text').height()}) : null;
+				console.log($('.welcome-text').height());
 			}
 		})
 	})

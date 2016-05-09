@@ -1,3 +1,3 @@
-<section class="welcome-text col-sm-6"></section>
-<section class="welcome-nav col-sm-8 col-sm-offset-4"></section>
+<section class="welcome-text col-sm-6 col-xs-12"></section>
+<section class="welcome-nav col-sm-8 col-sm-offset-4 col-xs-12"></section>
 <section class="main-content col-sm-12"></section>

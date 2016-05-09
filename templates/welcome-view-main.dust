@@ -1,3 +1,4 @@
+<i class="fa fa-bars mobile-menu-nav fa-2x"></i>
 <h1 class="welcome-heading page-header">{title}</h1>
 <h2 class="welcome-banner">{main}</h1>
 <p class="welcome-subtext">{subText|s}</p>

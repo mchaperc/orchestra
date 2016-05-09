@@ -1,1 +1,6 @@
-<a href="{link}"><span class="nav-text">{text} <i class="fa fa-{icon}"></i></span></a>
+<a href="{link}">
+	<span class="nav-content">
+		<span class="nav-text">{text}</span>
+		<i class="fa fa-{icon} nav-icon"></i>
+	</span>
+</a>
